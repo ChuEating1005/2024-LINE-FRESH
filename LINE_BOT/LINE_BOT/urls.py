@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from web import views
 urlpatterns = [
+    path('', views.info, name='info'),  # 確保有為 info 設置 name
+    path('article/<int:article_id>/', views.article_detail, name='article_detail'),
     path('admin/', admin.site.urls),
 ]
