@@ -41,6 +41,7 @@
 3. **Start the project:**
 
    ```bash
+   cd backend
    make start
    ```
 
