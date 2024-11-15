@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #16151d;
+            color: #ffffff;
+        }
+        .content {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        a {
+            color: #60a5fa; /* 藍色連結 */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-4xl p-5">
+        <h1 class="text-3xl font-bold text-center mb-6">{{ article.title }}</h1>
+        <div class="content text-lg markdown-body">{{ content|safe }}</div>
+        <div class="mt-6 text-center">
+            <a href="{{ article.url }}" target="_blank" class="text-blue-500 hover:text-blue-700 font-bold">外部連結</a>
+        </div>
+        <div class="mt-4 text-center">
+            <a href="{% url 'info' %}" class="text-blue-500 hover:text-blue-700">回到文章列表</a>
+        </div>
+    </div>
+</body>
+</html>

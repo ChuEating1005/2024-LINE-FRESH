@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from web import views as views_web
+from bot import views as views_bot
 urlpatterns = [
+    path('', views_web.info, name='info'),  # 確保有為 info 設置 name
+    path('article/<int:article_id>/', views_web.article_detail, name='article_detail'),
     path('admin/', admin.site.urls),
+    path('callback', views_bot.callback)
 ]
