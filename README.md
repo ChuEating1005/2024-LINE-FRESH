@@ -31,6 +31,13 @@
    LINE_CHANNEL_SECRET=
    ```
 
+4. **Pull the docker images:**
+
+   ```bash
+   docker pull mysql:8.0
+   ```
+
+
 3. **Start the project:**
 
    ```bash
