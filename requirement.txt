@@ -1,4 +1,0 @@
-Django==5.1.3
-python-dotenv==1.0.1
-markdown==3.7
-pymongo==4.10.1

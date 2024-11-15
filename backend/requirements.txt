@@ -32,3 +32,6 @@ urllib3==2.2.3
 wrapt==1.16.0
 yarl==1.17.1
 gunicorn
+line-bot-sdk==3.14.2
+python-decouple==3.8
+mysqlclient==2.2.6
