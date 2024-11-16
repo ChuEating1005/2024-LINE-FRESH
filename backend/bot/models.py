@@ -5,6 +5,7 @@ class User(models.Model):
     display_name = models.CharField(max_length=255, null=True, blank=True)
     pic_url = models.URLField(null=True, blank=True)
     age_group = models.CharField(max_length=10, choices=[('青世代', '青世代'), ('銀世代', '銀世代')])
+    status = models.CharField(max_length=10, default='idle') # idle, questioning, answering, writing
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -35,7 +36,7 @@ class Conversation(models.Model):
 
 class Question(models.Model):
     asker = models.ForeignKey('User', on_delete=models.CASCADE)
-    asker_group = models.CharField(max_length=10, choices=[('青', '青'), ('銀', '銀')])
+    asker_group = models.CharField(max_length=10, choices=[('青世代', '青世代'), ('銀世代', '銀世代')])
     content = models.TextField()
     category = models.CharField(max_length=50, choices=[
         ('傳統技藝', '傳統技藝'),

@@ -5,13 +5,14 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (
     MessageEvent, 
+    PostbackEvent,
     TextMessage, 
     TextSendMessage,
     AudioMessage
 )
 from .handlers.message_handlers import handle_text_message
 from .handlers.audio_handler import process_audio_message
-
+from .handlers.postback_handlers import handle_postback_event
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
 
 @csrf_exempt
@@ -37,3 +38,7 @@ def handle_message(event):
 @handler.add(MessageEvent, message=AudioMessage)
 def handle_audio(event):
     process_audio_message(event)
+
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    handle_postback_event(event)
