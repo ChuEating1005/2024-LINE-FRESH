@@ -12,7 +12,6 @@ from linebot.models import (
 from .handlers.message_handlers import handle_text_message
 from .handlers.audio_handler import process_audio_message
 
-
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
 
 @csrf_exempt
