@@ -5,7 +5,7 @@ class User(models.Model):
     display_name = models.CharField(max_length=255, null=True, blank=True)
     pic_url = models.URLField(null=True, blank=True)
     age_group = models.CharField(max_length=10, choices=[('青世代', '青世代'), ('銀世代', '銀世代')])
-    status = models.CharField(max_length=10, default='idle') # idle, questioning, answering, writing
+    status = models.CharField(max_length=20, default='idle') # idle, questioning, answering, writing
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -42,8 +42,7 @@ class Question(models.Model):
         ('傳統技藝', '傳統技藝'),
         ('歷史方面', '歷史方面'),
         ('佳餚食譜', '佳餚食譜'),
-        ('運動健身', '運動健身'),
-        ('健康養生心得', '健康養生心得'),
+        ('健康養生', '健康養生'),
         ('人生經驗', '人生經驗'),
         ('其他', '其他'),
     ])

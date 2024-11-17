@@ -15,9 +15,11 @@ wait-for-db:
 
 makemigrations:
 	$(PYTHON) manage.py makemigrations bot
+	$(PYTHON) manage.py makemigrations
 
 migrate:
 	$(PYTHON) manage.py migrate bot
+	$(PYTHON) manage.py migrate
 
 run:
 	$(PYTHON) manage.py runserver

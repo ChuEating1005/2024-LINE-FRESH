@@ -81,8 +81,8 @@ def rich_menu_object_main_json():
                     "height": 1686
                 },
                 "action": {
-                    "type": "postback",
-                    "data": "action=show_menu"
+                    "type": "message",
+                    "text": "使用說明"
                 }
             },
             {
@@ -93,8 +93,8 @@ def rich_menu_object_main_json():
                     "height": 843
                 },
                 "action": {
-                    "type": "postback",
-                    "data": "action=ask_question"
+                    "type": "message",
+                    "text": "我要提問！"
                 }
             },
             {
@@ -105,8 +105,8 @@ def rich_menu_object_main_json():
                     "height": 843
                 },
                 "action": {
-                    "type": "postback",
-                    "data": "action=send_image"
+                    "type": "message",
+                    "text": "我要發表文章！"
                 }
             },
             {
@@ -117,8 +117,8 @@ def rich_menu_object_main_json():
                     "height": 843
                 },
                 "action": {
-                    "type": "postback",
-                    "data": "action=answer_question"
+                    "type": "message",
+                    "text": "我要回答問題！"
                 }
             },
             {
@@ -129,8 +129,8 @@ def rich_menu_object_main_json():
                     "height": 843
                 },
                 "action": {
-                    "type": "postback",
-                    "data": "action=show_articles"
+                    "type": "message",
+                    "text": "我要查看文章！"
                 }
             }
         ]
@@ -170,7 +170,7 @@ def rich_menu_object_questiontopic_json():
                     "type": "postback",
                     "data": "action=ask_question_topic",
                     "inputOption": "openKeyboard",
-                    "fillInText": "主題:傳統技藝 \n"
+                    "fillInText": "主題：傳統技藝\n你的問題："
                 }
             },
             {
@@ -184,7 +184,7 @@ def rich_menu_object_questiontopic_json():
                     "type": "postback",
                     "data": "action=ask_question_topic",
                     "inputOption": "openKeyboard",
-                    "fillInText": "主題:人生經驗 \n"
+                    "fillInText": "主題：人生經驗\n你的問題："
                 }
             },
             {
@@ -198,7 +198,7 @@ def rich_menu_object_questiontopic_json():
                     "type": "postback",
                     "data": "action=ask_question_topic",
                     "inputOption": "openKeyboard",
-                    "fillInText": "主題:歷史方面 \n"
+                    "fillInText": "主題：歷史方面\n你的問題："
                 }
             },
             {
@@ -212,7 +212,7 @@ def rich_menu_object_questiontopic_json():
                     "type": "postback",
                     "data": "action=ask_question_topic",
                     "inputOption": "openKeyboard",
-                    "fillInText": "主題:健康養生 \n"
+                    "fillInText": "主題：健康養生\n你的問題："
                 }
             },
             {
@@ -226,7 +226,7 @@ def rich_menu_object_questiontopic_json():
                     "type": "postback",
                     "data": "action=ask_question_topic",
                     "inputOption": "openKeyboard",
-                    "fillInText": "主題:佳餚食譜 \n"
+                    "fillInText": "主題：佳餚食譜\n你的問題："
                 }
             },
             {
@@ -240,7 +240,105 @@ def rich_menu_object_questiontopic_json():
                     "type": "postback",
                     "data": "action=ask_question_topic",
                     "inputOption": "openKeyboard",
-                    "fillInText": "主題:其他 \n"
+                    "fillInText": "主題：其他\n你的問題："
+                }
+            }
+        ]
+    }
+
+def rich_menu_object_answertopic_json():
+    return {
+        "size": {
+            "width": 2500,
+            "height": 1686
+        },
+        "selected": False,
+        "name": "richmenu-answertopic",
+        "chatBarText": "📌選擇感興趣的主題",
+        "areas": [
+            {
+                "bounds": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 2500,
+                    "height": 200
+                },
+                "action": {
+                    "type": "richmenuswitch",
+                    "richMenuAliasId": "richmenu-alias-main",
+                    "data": "richmenu-changed-to-main"
+                }
+            },
+            {
+                "bounds": {
+                    "x": 0,
+                    "y": 200,
+                    "width": 833,
+                    "height": 743
+                },
+                "action": {
+                    "type": "message",
+                    "text": "查看主題:傳統技藝"
+                }
+            },
+            {
+                "bounds": {
+                    "x": 0,
+                    "y": 944,
+                    "width": 833,
+                    "height": 743
+                },
+                "action": {
+                    "type": "message",
+                    "text": "查看主題:人生經驗"
+                }
+            },
+            {
+                "bounds": {
+                    "x": 834,
+                    "y": 200,
+                    "width": 833,
+                    "height": 743
+                },
+                "action": {
+                    "type": "message",
+                    "text": "查看主題:歷史方面"
+                }
+            },
+            {
+                "bounds": {
+                    "x": 834,
+                    "y": 944,
+                    "width": 833,
+                    "height": 743
+                },
+                "action": {
+                    "type": "message",
+                    "text": "查看主題:健康養生"
+                }
+            },
+            {
+                "bounds": {
+                    "x": 1667,
+                    "y": 200,
+                    "width": 833,
+                    "height": 743
+                },
+                "action": {
+                    "type": "message",
+                    "text": "查看主題:佳餚食譜"
+                }
+            },
+            {
+                "bounds": {
+                    "x": 1667,
+                    "y": 944,
+                    "width": 833,
+                    "height": 743
+                },
+                "action": {
+                    "type": "message",
+                    "text": "查看主題:其他"
                 }
             }
         ]
@@ -255,6 +353,8 @@ def create_action(action):
             return PostbackAction(data=action.get('data'), inputOption=action.get('inputOption'), fillInText=action.get('fillInText'))
         else:
             return PostbackAction(data=action.get('data'))
+    elif action['type'] == 'message':
+        return MessageAction(text=action.get('text'))
     else:
         return RichMenuSwitchAction(
             rich_menu_alias_id=action.get('richMenuAliasId'),
@@ -383,9 +483,46 @@ def main():
         ).rich_menu_id
 
         # Upload image to rich menu question topic
-        with open('./static/richmenu-questiontopic.png', 'rb') as image:
+        with open('./static/richmenu-topic.png', 'rb') as image:
             line_bot_blob_api.set_rich_menu_image(
                 rich_menu_id=rich_menu_questiontopic_id,
+                body=bytearray(image.read()),
+                _headers={'Content-Type': 'image/png'}
+            )
+
+        # Create rich menu for answer topic
+        rich_menu_object_answertopic = rich_menu_object_answertopic_json()
+
+        areas = [
+            RichMenuArea(
+                bounds=RichMenuBounds(
+                    x=info['bounds']['x'],
+                    y=info['bounds']['y'],
+                    width=info['bounds']['width'],
+                    height=info['bounds']['height']
+                ),
+                action=create_action(info['action'])
+            ) for info in rich_menu_object_answertopic['areas']
+        ]
+
+        rich_menu_to_answertopic_create = RichMenuRequest(
+            size=RichMenuSize(width=rich_menu_object_answertopic['size']['width'],
+                              height=rich_menu_object_answertopic['size']['height']),
+            selected=rich_menu_object_answertopic['selected'],
+            name=rich_menu_object_answertopic['name'],
+            chat_bar_text=rich_menu_object_answertopic['chatBarText'],
+            areas=areas
+        )
+
+        rich_menu_answertopic_id = line_bot_api.create_rich_menu(
+            rich_menu_request=rich_menu_to_answertopic_create
+        ).rich_menu_id
+
+
+        # Upload image to rich menu answer topic    
+        with open('./static/richmenu-topic.png', 'rb') as image:
+            line_bot_blob_api.set_rich_menu_image(
+                rich_menu_id=rich_menu_answertopic_id,
                 body=bytearray(image.read()),
                 _headers={'Content-Type': 'image/png'}
             )
