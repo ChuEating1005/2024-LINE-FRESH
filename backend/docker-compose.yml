@@ -12,12 +12,11 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       TZ: Asia/Taipei
     ports:
-      - "3308:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./mysql/init:/docker-entrypoint-initdb.d
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-
   mongodb:
     image: mongo:latest
     container_name: linebot_mongodb

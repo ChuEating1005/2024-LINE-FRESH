@@ -14,9 +14,11 @@ wait-for-db:
 	$(PYTHON) wait_for_db.py
 
 makemigrations:
+	$(PYTHON) manage.py makemigrations bot
 	$(PYTHON) manage.py makemigrations
 
 migrate:
+	$(PYTHON) manage.py migrate bot
 	$(PYTHON) manage.py migrate
 
 run:
@@ -32,7 +34,9 @@ stop:
 	$(DOCKER_COMPOSE) down
 
 remove:
-	docker-compose down -v
+	$(DOCKER_COMPOSE) down -v
+	rm -rf bot/migrations/*.py
+	rm -rf bot/migrations/*.pyc
 
 restart: stop start
 

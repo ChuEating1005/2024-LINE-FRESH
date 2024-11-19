@@ -15,13 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from web import views as views_web
 from django.urls import path, include
-
+from bot import views
 urlpatterns = [
-    path('', views_web.info, name='info'),  # 確保有為 info 設置 name
-    path('article/<int:article_id>/', views_web.article_detail, name='article_detail'),
     path('admin/', admin.site.urls),
     path('bot/', include('bot.urls')),
+    path('', views.info, name='info'),  # 列出文章標題
+    path('article/<int:article_id>/', views.article_detail, name='article_detail'),  # 顯示文章內容
 ]

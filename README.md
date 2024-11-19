@@ -37,15 +37,12 @@
    docker pull mysql:8.0
    ```
 
-   mongoDB part: (change 27017 to your own mongoDB local port)
-   ```bash
-   docker run -d --name mongodb -p 27017:27017 mongo:latest
-   ```
 
 3. **Start the project:**
 
    ```bash
    cd backend
+   python3 set_richmenu.py
    make start
    ```
 
@@ -72,18 +69,10 @@
 - Access the Django admin interface at `http://localhost:8000/admin/`.
 - The bot's callback URL is `http://localhost:8000/bot/callback/`.
 
-## zichen part
-LINEBOT/db_utils/裡面有把資料庫crud包成handler可以直接call 不過沒有很完整 只有一些新增刪除查找
-資料庫原本是用mongoDB的atlas 但免費的一下子就滿了 後來改先用local 把uri = "mongodb://localhost:27017/"  改成自己的port
-跑db_handler.py可以存基本的資料庫欄位做測試
-還沒處理嵌入圖片的方法
-
-LINEBOT/web/裡面的前端是我簡單測試用的 有兩個畫面 一個是條列文章title 還有按鈕可以點入各個文章 第二個就是顯示文章的頁面 
-只要看templates/和views.py 其他沒改
-
-不過目前把markdown傳到html不太會正確排版 好像還要下載markdown的css 或是用其他方法存 這邊還沒做
-
-跑前面的make start / make restart可以顯示網頁
-如果要測試mongoDB可以先跑python db_utils/db_handler.py填充資料庫
-
-我在backend裡面放了Dockerfile和fly.toml是我做到一半的deploy to flyio, 還沒成功 但感覺可以最後在部屬 因為其實localhost也可以驅動linebot 可以先測試
+### 11/19 zichen
+- 新增一個richmenu : 所有文章vs推薦文章 如果點所有文章 會導向一個有所有文章的website(要手動更新link 在settings.py) 點推薦文章的話會變成linebot中可以滑動的文章列表
+- 新增openai的連接 在openai_Handlers裡面 用gpt3.5 有下基本的prompt 感覺質量還有點普通 要調整一下
+- 目前還沒有加入audio 所以先用語言輸入測試生成文章 點擊發表文章就可以測
+- 一個問題回答超過五次的話會送去生成然後create article 
+- 網頁目前是一般的html 我測試後端用的 也還沒建liff 美編就之後交給阿原了
+- 有做生成和顯示tag 看之後要不要限制tag種類 可以分類文章

@@ -12,11 +12,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 LINE_ACCESS_TOKEN = config('LINE_ACCESS_TOKEN')
 LINE_CHANNEL_SECRET = config('LINE_CHANNEL_SECRET')
+OPENAI_API_KEY = config('OPENAI_API_KEY')
 
+CURRENT_BASE_URL = config('CURRENT_BASE_URL')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://42be-140-113-136-218.ngrok-free.app',
+]
 
 
 # Application definition
@@ -29,8 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bot',
-    'db_utils',
-    'web'
 ]
 
 MIDDLEWARE = [
@@ -45,10 +49,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

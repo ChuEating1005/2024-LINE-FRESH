@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ article.title }}</title>
+    <!-- TailwindCSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- GitHub Markdown CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
     <style>
         body {
             background-color: #16151d;
@@ -15,21 +18,45 @@
             padding: 20px;
             border-radius: 8px;
         }
-        a {
-            color: #60a5fa; /* 藍色連結 */
-        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
     <div class="w-full max-w-4xl p-5">
+        <!-- Title -->
         <h1 class="text-3xl font-bold text-center mb-6">{{ article.title }}</h1>
-        <div class="content text-lg markdown-body">{{ content|safe }}</div>
-        <div class="mt-6 text-center">
-            <a href="{{ article.url }}" target="_blank" class="text-blue-500 hover:text-blue-700 font-bold">外部連結</a>
+        <!-- Tags Section -->
+        <div class="mt-4">
+            <h3 class="text-xl font-bold mb-2">Tags:</h3>
+            <div class="flex flex-wrap gap-2">
+                {% for tag in article.tags %}
+                <span class="bg-blue-500 text-white py-1 px-3 rounded-full text-sm">{{ tag }}</span>
+                {% empty %}
+                <p class="text-gray-400">No tags available.</p>
+                {% endfor %}
+            </div>
         </div>
+        <!-- Markdown Content -->
+        <div class="content text-lg markdown-body" id="markdown-content"></div>
+
+        
+
+        <!-- Back to Article List -->
         <div class="mt-4 text-center">
             <a href="{% url 'info' %}" class="text-blue-500 hover:text-blue-700">回到文章列表</a>
         </div>
     </div>
+
+    <!-- Import marked.js -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 获取 Markdown 原始内容
+            const rawMarkdownContent = `{{ content|escapejs }}`;
+            // 使用 marked.js 渲染 Markdown 为 HTML
+            const renderedHtml = marked.parse(rawMarkdownContent);
+            // 插入到内容容器中
+            document.getElementById('markdown-content').innerHTML = renderedHtml;
+        });
+    </script>
 </body>
 </html>
