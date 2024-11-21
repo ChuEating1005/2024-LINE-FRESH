@@ -307,20 +307,21 @@ def create_question_bubble(questions):
 def response_article_for_testing(event):
     bubble = {
         "type": "bubble",
-        "size": "kilo",
+        "size": "mega",  # 或 "giga" 視需要調整大小
         "body": {
             "type": "box",
             "layout": "vertical",
             "contents": [
                 {
                     "type": "text",
-                    "text": "發表文章",  # 問題主題
+                    "text": "請用語音功能錄製您的故事並送出，或是用文字輸入(語音輸入錄製完直接送出即可、文字輸入請點下方按鈕)",  # 問題主題
+                    "wrap": True,  # 啟用換行,
                     "weight": "bold",
                     "size": "md",
                     "align": "center"  # 置中
                 }
             ],
-            "paddingAll": "md"
+            "paddingAll": "sm"  # 減少內距
         },
         "footer": {
             "type": "box",
@@ -331,7 +332,7 @@ def response_article_for_testing(event):
                     "style": "primary",
                     "action": {
                         "type": "postback",
-                        "label": "發表文章",
+                        "label": "使用打字輸入發表文章",
                         "data": "action=answer",  # postback action data
                         "inputOption": "openKeyboard",
                         "fillInText": "發表文章："  # 用戶點擊按鈕後顯示的文字

@@ -13,7 +13,7 @@ SECRET_KEY = config('SECRET_KEY')
 LINE_ACCESS_TOKEN = config('LINE_ACCESS_TOKEN')
 LINE_CHANNEL_SECRET = config('LINE_CHANNEL_SECRET')
 OPENAI_API_KEY = config('OPENAI_API_KEY')
-
+AUDIO_KEY = config('AUDIO_KEY')
 CURRENT_BASE_URL = config('CURRENT_BASE_URL')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -21,7 +21,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://42be-140-113-136-218.ngrok-free.app',
+    CURRENT_BASE_URL,
 ]
 
 
