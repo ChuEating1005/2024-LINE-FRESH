@@ -372,7 +372,7 @@ def generate_article(event, context):
     # 创建文章并存入数据库
     articles = re.sub(r"### Tags\n\[(.+)\]", "", articles)
     article = create_article(event, title, description, articles, tags, input_text=context)
-    respond_message(event, f"你的文章連結:\n{settings.CURRENT_BASE_URL}/article/{article.id}")
+    respond_message(event, f"你的故事:{context}\n你的文章連結:\n{settings.CURRENT_BASE_URL}/article/{article.id}")
 
 
     
