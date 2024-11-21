@@ -16,4 +16,14 @@ pip install --global-option='build_ext' --global-option='-I/usr/local/include' -
 # if you encouter some issues while installing PyAudio
 ```
 
+### Usage
+```bash
+
+#Step 1: Preprocess the audio file(change file name to test.m4a)
+python preprocess_voice.py
+
+#Step 2: Convert audio to text
+python wav2text.py
+
+```
 see the detail document in [the SDK repository page](https://github.com/TaiwanAILabs-Yating/asr-sdk-python)
