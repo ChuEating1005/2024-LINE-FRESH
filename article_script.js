@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const articleMdPath = "article.md"; // 主文章的路徑 -> should change to the database
   const imgDir = "./img"; // 主文章圖片資料夾 -> should change to the database
   const relatedDirPath = "./related"; // 相關文章資料夾 -> should change to the database
+  const articleTagPath = "article_tag.txt"; // 標籤文件的路徑
 
   // load the main article
   fetch(articleMdPath)
@@ -73,4 +74,28 @@ document.addEventListener("DOMContentLoaded", () => {
         relatedContent.innerHTML += `<p>無法載入相關文章資料。</p>`;
       });
   });
+  // 載入文章標籤
+  fetch(articleTagPath)
+    .then((response) => {
+      if (!response.ok) throw new Error(`載入標籤失敗: ${response.status}`);
+      return response.text();
+    })
+    .then((tagText) => {
+      const tags = tagText.split(" ").map((tag) => tag.trim()).filter(Boolean);
+      const tagContainer = document.createElement("div");
+      tagContainer.className = "tag-container";
+
+      tags.forEach((tag) => {
+        const tagElement = document.createElement("span");
+        tagElement.className = "tag";
+        tagElement.innerText = tag;
+        tagContainer.appendChild(tagElement);
+      });
+
+      const authorTimeElement = document.getElementById("article-author-time");
+      authorTimeElement.insertAdjacentElement("afterend", tagContainer);
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
 });

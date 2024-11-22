@@ -15,9 +15,8 @@ body {
 }
 
 /* Header 樣式 */
-/* Header 樣式 */
 header {
-  background: #d4c2b0;
+  background: #C8B6A6;
   color: #333;
   padding: 10px 20px;
   position: sticky;
@@ -107,6 +106,35 @@ article {
   font-size: 0.9rem;
   margin-top: 5px;
   word-wrap: break-word;
+}
+
+/* TAG */
+/* Tag 容器樣式 */
+.tag-container {
+  display: flex;
+  flex-wrap: wrap; /* 如果超出寬度自動換行 */
+  gap: 8px; /* 每個 tag 之間的間距 */
+  margin: 6px 0 30px; /* 與周圍內容的間距 */
+}
+
+/* 單個 tag 的樣式 */
+.tag {
+  background-color: #E7EBE6; 
+  color: #444444; 
+  padding: 5px 10px; /* 內邊距 */
+  border-radius: 15px; /* 圓角效果 */
+  font-size: 0.8rem; /* 字體大小 */
+  white-space: nowrap; /* 避免文字換行 */
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* 過渡效果 */
+}
+
+/* Tag 懸停效果 */
+.tag:hover {
+  background-color: #d4c2b0; /* 懸停時的背景顏色 */
+  transform: scale(1.05); /* 放大一點點 */
 }
 
 /* 手機優化 */
