@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>青銀故事屋</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+          <h1>青銀故事屋</h1>
+          <img src="./img_icon/menu.png" alt="Menu" class="menu-icon">
+        </div>
+      </header>      
+
+  <main>
+    <section id="about">
+      <h2>關於我們</h2>
+      <div class="intro-line"></div>
+      <div class="about-text-container">
+        <p>我們是一群來自陽明交通大學的學生，在與家中長輩聊天時，發現長輩們有許多的故事值得被保留與傳承，同時我們也一樣對年輕人的文化保存有好奇。</p>
+        <p>因此，我們創建了這個平台，讓這樣的延續與交流被記憶與流傳。</p>
+      </div>
+    </section>
+
+    <section id="generation">
+        <h2>你屬於哪個世代</h2>
+        <div class="generation-container">
+          <!-- 青世代 -->
+          <div class="trapezoid youth">
+            <div class="content">
+              <p class="title">青世代</p>
+              <div class="title-line"></div>
+              <p class="description">科技屬於居民，追求多元價值觀，好奇長輩的經驗與智慧。</p>
+            </div>
+          </div>
+          <!-- 銀世代 -->
+          <div class="trapezoid senior">
+            <div class="content">
+              <p class="title">銀世代</p>
+              <div class="title-line"></div>
+              <p class="description">有時間積累成的智慧，為科技移民者，嘗試參與現代科技。</p>
+            </div>
+          </div>
+        </div>
+      </section>     
+      <section id="article-list">
+        <!-- 標題 -->
+        <h2>文章列表</h2>
+        <div class="divider"></div>
+      
+        <!-- 傳統技藝主題 -->
+        <div class="topic-container">
+            <img src="./img_list/1.png" alt="Traditional Topic Image" class="topic-image" />
+            <div class="topic-text">
+            <h3>傳統技藝</h3>
+            <div class="topic-divider"></div>
+            <p>傳統技藝是文化傳承的象徵，這些技藝蘊含著世代智慧與藝術價值。將珍貴的手藝藉由文章傳遞，讓傳統在現代重焕生機。</p>
+            </div>
+        </div>
+        <div class="article-container">
+            <img src="./img_icon/left_arrow.png" alt="Left Arrow" class="arrow left-arrow" data-topic="傳統技藝" />
+            <div class="article-list" data-topic="傳統技藝" data-file="article_list_1.txt"></div>
+            <img src="./img_icon/right_arrow.png" alt="Right Arrow" class="arrow right-arrow" data-topic="傳統技藝" />
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 歷史文化主題 -->
+        <div class="topic-container reverse">
+            <img src="./img_list/2.png" alt="History Topic Image" class="topic-image" />
+            <div class="topic-text">
+            <h3>歷史文化</h3>
+            <div class="topic-divider"></div>
+            <p>歷史文化是民族的根基，記錄著重要的故事與價值觀。這些文化底蘊都能成為世代交流的橋梁，也是重要的文化資產。</p>
+            </div>
+        </div>
+        <div class="article-container">
+            <img src="./img_icon/left_arrow.png" alt="Left Arrow" class="arrow left-arrow" data-topic="歷史文化" />
+            <div class="article-list" data-topic="歷史文化" data-file="article_list_2.txt"></div>
+            <img src="./img_icon/right_arrow.png" alt="Right Arrow" class="arrow right-arrow" data-topic="歷史文化" />
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 佳餚食譜主題 -->
+        <div class="topic-container">
+            <img src="./img_list/3.png" alt="Traditional Topic Image" class="topic-image" />
+            <div class="topic-text">
+            <h3>佳餚食譜</h3>
+            <div class="topic-divider"></div>
+            <p>美食是情感的紐帶，記錄著重要的味道與地方特色。佳餚食譜不僅連結了味蕾，更也讓美味在每個廚房中得以延續。</p>
+            </div>
+        </div>
+        <div class="article-container">
+            <img src="./img_icon/left_arrow.png" alt="Left Arrow" class="arrow left-arrow" data-topic="佳餚食譜" />
+            <div class="article-list" data-topic="佳餚食譜" data-file="article_list_3.txt"></div>
+            <img src="./img_icon/right_arrow.png" alt="Right Arrow" class="arrow right-arrow" data-topic="佳餚食譜" />
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 人生經驗主題 -->
+        <div class="topic-container reverse">
+            <img src="./img_list/4.png" alt="History Topic Image" class="topic-image" />
+            <div class="topic-text">
+            <h3>人生經驗</h3>
+            <div class="topic-divider"></div>
+            <p>人生經驗是寶貴的智慧庫。無論是生活哲學、應對挑戰以及成功與失敗的故事，都是專屬生命的重要篇章。</p>
+            </div>
+        </div>
+        <div class="article-container">
+            <img src="./img_icon/left_arrow.png" alt="Left Arrow" class="arrow left-arrow" data-topic="人生經驗" />
+            <div class="article-list" data-topic="人生經驗" data-file="article_list_2.txt"></div>
+            <img src="./img_icon/right_arrow.png" alt="Right Arrow" class="arrow right-arrow" data-topic="人生經驗" />
+        </div>
+        <div class="divider"></div>
+
+        <!-- 科技新知主題 -->
+        <div class="topic-container">
+            <img src="./img_list/5.png" alt="Traditional Topic Image" class="topic-image" />
+            <div class="topic-text">
+            <h3>科技新知</h3>
+            <div class="topic-divider"></div>
+            <p>科技是現代生活的驅動力，青世代熟悉數位技術，銀世代則對新科技抱有學習熱情。科技世界將為不同世代帶來改變。</p>
+            </div>
+        </div>
+        <div class="article-container">
+            <img src="./img_icon/left_arrow.png" alt="Left Arrow" class="arrow left-arrow" data-topic="科技新知" />
+            <div class="article-list" data-topic="科技新知" data-file="article_list_3.txt"></div>
+            <img src="./img_icon/right_arrow.png" alt="Right Arrow" class="arrow right-arrow" data-topic="科技新知" />
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 其他主題 -->
+        <div class="topic-container reverse">
+            <img src="./img_list/6.png" alt="History Topic Image" class="topic-image" />
+            <div class="topic-text">
+            <h3>其他</h3>
+            <div class="topic-divider"></div>
+            <p>人們對生命的體驗不侷限在一定的區塊，在這個主題，一切意想不到都將可能為別的生命併發新的體驗。</p>
+            </div>
+        </div>
+        <div class="article-container">
+            <img src="./img_icon/left_arrow.png" alt="Left Arrow" class="arrow left-arrow" data-topic="其他" />
+            <div class="article-list" data-topic="其他" data-file="article_list_2.txt"></div>
+            <img src="./img_icon/right_arrow.png" alt="Right Arrow" class="arrow right-arrow" data-topic="其他" />
+        </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

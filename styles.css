@@ -1,0 +1,296 @@
+/* 基本樣式 */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+  color: #333;
+}
+
+/* Header 樣式 */
+/* Header 樣式 */
+header {
+  background: #C8B6A6;
+  color: #333;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* 使用 Flexbox 排列 Header 內容 */
+.header-container {
+  width: 100%;
+  display: flex; /* 開啟 Flexbox 佈局 */
+  justify-content: space-between; /* 左右兩邊元素對齊 */
+  align-items: center; /* 確保垂直方向居中對齊 */
+}
+
+/* 標題樣式 */
+header h1 {
+  font-size: 1.5rem;
+  margin: 0; /* 移除多餘的邊距 */
+}
+
+/* Menu 圖標樣式 */
+.menu-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer; /* 顯示點擊效果的指標 */
+  margin: 0; /* 確保圖標與標題完全水平 */
+}
+
+/* 關於我們 */
+#about {
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
+
+#about h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2px; /* 縮小標題與文字之間的間距 */
+}
+
+.intro-line {
+  height: 1px; /* 線條高度 */
+  width: 100px;
+  background-color: black; /* 線條顏色 */
+  margin: 2px 0; /* 縮短標題與說明文字之間的距離 */
+}
+
+.about-text-container {
+  width: 259px;
+  height: 187.322px;
+  padding: 5px;
+  background: transparent; /* 背景透明 */
+  border: none; /* 邊框透明 */
+  margin-top: 2px; /* 確保文字容器緊貼標題 */
+}
+
+.about-text-container p {
+  margin-bottom: 5px;
+  text-align: justify;
+  font-size: 0.9rem;
+}
+
+
+/* 世代區塊 */
+#generation {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 30px;
+}
+
+#generation h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.generation-container {
+  position: relative; /* 容器設定相對定位，便於子元素定位 */
+  display: flex;
+  justify-content: center; /* 居中排列 */
+  align-items: flex-start; /* 調整垂直方向 */
+}
+
+.trapezoid {
+  width: 217px; /* 固定梯形寬度 */
+  height: 180px; /* 固定梯形高度 */
+  position: absolute; /* 使用絕對定位實現重疊效果 */
+  left: 0px; /* 靠左對齊 */
+  clip-path: polygon(0% 0%, 100% 0%, 57% 100%, 0% 100%);
+  background-color: #E1E6E0;
+  overflow: hidden;
+  z-index: 1; /* 青世代位於底層 */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.trapezoid.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.trapezoid.senior {
+  clip-path: polygon(43% 0%, 100% 0%, 100% 100%, 0% 100%);
+  background-color: #C8B6A6;
+  margin-top: 15px;
+  z-index: 2; /* 銀世代位於上層 */
+  left: 155px; /* 調整銀世代的位置，實現部分重疊 */
+}
+
+.trapezoid .content {
+  position: absolute;
+  width: calc(100%); /* 限制內容寬度在梯形內，留出內邊距 */
+  height: calc(100%); /* 限制內容高度，避免超出梯形 */
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 元素從上到下排列 */
+  box-sizing: border-box; /* 包含內邊距在寬高內 */
+}
+
+.trapezoid .title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: left; /* 預設左對齊 */
+}
+
+.trapezoid.senior .title {
+  text-align: right; /* 銀世代標題右對齊 */
+}
+
+.title-line {
+  height: 2px; /* 線條高度 */
+  width: 45%;
+  background-color: black; /* 線條顏色 */
+  margin: 5px 0; /* 縮短標題與說明文字之間的距離 */
+}
+
+.trapezoid.senior .title-line {
+  height: 2px;
+  width: 45%;
+  margin-left: auto; /* 讓銀世代線條靠右 */
+}
+
+.trapezoid .description {
+  font-size: 0.98rem;
+  text-align: justify;
+  margin: 0;
+  width: 100%; /* 寬度與梯形內容寬度一致 */
+  max-width: 118px; /* 限制說明文字框的最大寬度 */
+  height: 89px; /* 固定高度 */
+  overflow: hidden; /* 隱藏多餘文字 */
+  padding: 5px; /* 添加內邊距 */
+  /*background-color: rgba(255, 255, 255, 0.8); /* 白色半透明背景 */
+  border-radius: 5px; /* 讓文字框更柔和 */
+}
+
+.trapezoid.senior .description {
+  text-align: right; /* 銀世代說明文字右對齊 */
+  margin-left: auto; /* 讓說明框靠右 */
+}
+
+
+/* 文章列表 */
+#article-list {
+  margin-top: 210px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
+
+#article-list h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px; /* 控制標題與後面內容的間距 */
+}
+
+.divider {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 90%;
+  height: 1px;
+  background-color: black;
+  margin: 10px auto;
+}
+
+/* 主題部分 */
+.topic-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.topic-container.reverse {
+  flex-direction: row-reverse; /* 左右對調 */
+}
+
+.topic-image {
+  width: 156px;
+  height: 182px;
+  object-fit: cover; /* 確保圖片不會變形 */
+}
+
+.topic-text {
+  text-align: left;
+  max-width: 400px; /* 限制文字寬度 */
+}
+
+.topic-text h3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.topic-divider {
+  width: 80%;
+  height: 1.5px;
+  background-color: black; /* 線條顏色 */
+  margin: 8px 0; /* 控制線條與文字的間距 */
+}
+
+.topic-text p {
+  max-width: 141px; /* 限制說明文字框的最大寬度 */
+  font-size: 0.9rem;
+  color: #333;
+  margin: 10px 0 0;
+}
+
+/* 文章列表 */
+.article-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* 父容器設為相對定位 */
+}
+
+.arrow {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  position: absolute; /* 使用絕對定位確保箭頭對稱 */
+  top: 50%;
+  transform: translateY(-80%); /* 垂直居中 */
+}
+
+.left-arrow {
+  left: 10px; /* 靠左對齊，距離調整 */
+}
+
+.right-arrow {
+  right: 20px; /* 靠右對齊，距離調整 */
+}
+
+.article-list {
+  display: flex;
+  gap: 10px; /* 控制文章項目之間的間距 */
+  overflow: hidden; /* 隱藏超出範圍的內容 */
+  width: 280px; /* 確保同時顯示兩篇文章（130*2 + gap） */
+}
+
+.article-item {
+  flex: 0 0 130px; /* 固定每個文章項目的寬度 */
+  text-align: center;
+}
+
+.article-item img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover; /* 確保圖片比例正確 */
+}
+
+.article-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 5px 0 0;
+}
+
+.article-author {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 2px 0 0;
+}
