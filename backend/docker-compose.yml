@@ -1,6 +1,14 @@
 version: '3.8'
 
 services:
+  web:
+      build: .
+      ports:
+        - "8000:8000"
+      env_file:
+        - .env
+      depends_on:
+        - db
   db:
     image: mysql:8.0
     container_name: linebot_mysql
@@ -17,18 +25,7 @@ services:
       - mysql_data:/var/lib/mysql
       - ./mysql/init:/docker-entrypoint-initdb.d
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-  mongodb:
-    image: mongo:latest
-    container_name: linebot_mongodb
-    restart: always
-    ports:
-      - "27017:27017"  #replace to your local mongodb port
-    volumes:
-      - mongo_data:/data/db
-    command: ["mongod", "--bind_ip_all", "--noauth"] # 添加 --noauth 禁用身份驗證
 
 volumes:
   mysql_data: 
     name: linebot_mysql_data
-  mongo_data:
-    name: linebot_mongo_data
