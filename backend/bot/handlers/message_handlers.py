@@ -18,6 +18,7 @@ def handle_text_message(event):
         ask_question(user)
         update_user_status(user, 'questioning')
         respond_message(event, "請選擇感興趣的主題並輸入問題！")
+    # 回答問題
     elif user_message == "我要回答問題！":
         update_user_status(user, 'answering')
         answer_question_button(event)
@@ -28,6 +29,18 @@ def handle_text_message(event):
         respond_message(event, "請選擇感興趣的主題！")
     elif user_message.startswith("查看主題"):
         view_question_by_topic(event)
+
+    # 發表文章
+    elif user_message == "我要發表文章！":
+        response_article_for_testing(event)
+    elif user_message.startswith("發表文章："):
+        generate_article(event, user_message)
+
+    # 查看文章
+    elif user_message == "我要查看文章！":
+        select_article(user)
+        respond_message(event, "請選擇要看推薦文章，還是所有文章")
+
     # 問問題模式
     elif status == 'questioning':
         if create_question(event, user, group):
@@ -38,4 +51,8 @@ def handle_text_message(event):
         answer_question(event, user)
     else:
         respond_message(event, "請輸入正確的指令")
+    
+        respond_message(event, "請輸入正確的指令")
+
+
     

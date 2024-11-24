@@ -6,6 +6,10 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ['id', 'line_id', 'display_name', 'age_group', 'created_at']
     search_fields = ['line_id', 'display_name']
     list_filter = ['age_group', 'created_at']
+    list_display = ['id', 'line_id', 'display_name', 'age_group', 'created_at']
+    search_fields = ['line_id', 'display_name']
+    list_filter = ['age_group', 'created_at']
+# admin.site.register(User)
 
 @admin.register(AudioMessage)
 class AudioMessageAdmin(admin.ModelAdmin):

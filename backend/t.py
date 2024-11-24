@@ -77,38 +77,25 @@ def rich_menu_object_article_json():
                 "bounds": {
                     "x": 0,
                     "y": 0,
-                    "width": 2500,
-                    "height": 200
-                },
-                "action": {
-                    "type": "richmenuswitch",
-                    "richMenuAliasId": "richmenu-alias-main",
-                    "data": "richmenu-changed-to-main"
-                }
-            },
-            {
-                "bounds": {
-                    "x": 0,
-                    "y": 200,
                     "width": 1250,
-                    "height": 1486
+                    "height": 1686
                 },
                 "action": {
                     "type": "postback",
-                    "data": "action=choose_article&select=所有文章",
+                    "data": "action=choose_generation&generation=所有文章",
                     "displayText": "所有文章"
                 }
             },
             {
                 "bounds": {
                     "x": 1251,
-                    "y": 200,
+                    "y": 0,
                     "width": 1250,
-                    "height": 1486
+                    "height": 1686
                 },
                 "action": {
                     "type": "postback",
-                    "data": "action=choose_article&select=推薦文章",
+                    "data": "action=choose_generation&generation=推薦文章",
                     "displayText": "推薦文章"
                 }
             }

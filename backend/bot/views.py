@@ -15,6 +15,11 @@ from .handlers.audio_handler import process_audio_message
 from .handlers.postback_handlers import handle_postback_event
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
 
+from .handlers.utils import list_all_article, get_article_by_id
+from django.shortcuts import render
+import markdown
+
+
 @csrf_exempt
 def callback(request):
     if request.method == 'POST':
@@ -42,3 +47,14 @@ def handle_audio(event):
 @handler.add(PostbackEvent)
 def handle_postback(event):
     handle_postback_event(event)
+
+@csrf_exempt
+def info(request):
+    articles = list_all_article()
+    return render(request, 'info.html', {'articles': articles})
+
+@csrf_exempt
+def article_detail(request, article_id):
+    article = get_article_by_id(article_id)
+    article_content = markdown.markdown(article["content"])
+    return render(request, 'article.html', {'article': article, 'content': article_content})

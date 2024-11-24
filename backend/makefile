@@ -2,7 +2,7 @@
 
 # Variables
 DOCKER_COMPOSE = docker-compose
-PYTHON = python
+PYTHON = python3
 
 # Targets
 .PHONY: up wait-for-db makemigrations migrate run start

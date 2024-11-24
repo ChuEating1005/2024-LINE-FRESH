@@ -17,6 +17,13 @@ def handle_postback_event(event):
             respond_message(event, f"註冊成功！")
         else:
             respond_message(event, "發生錯誤，請再試一次")
+    
+    elif action == "choose_article":
+        select = data.get('select')
+        if select == '所有文章':
+            respond_message(event, f"所有文章網頁:\n{settings.CURRENT_BASE_URL}")
+        else:
+            view_popular_articles(event)
         
         
 

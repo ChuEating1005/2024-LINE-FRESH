@@ -61,7 +61,9 @@ class Article(models.Model):
     author = models.ForeignKey('User', on_delete=models.CASCADE)
     description = models.TextField()
     content = models.TextField()
-    image_url = models.URLField()
+    image_url = models.URLField(default="")
+    tags = models.JSONField(default=list)
+    input_text = models.TextField(default="")
     likes = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
