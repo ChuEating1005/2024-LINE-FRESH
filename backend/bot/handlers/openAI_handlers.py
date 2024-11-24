@@ -10,7 +10,7 @@ class OpenAIHandler:
 
     def create_chain(self, is_article):
         model = ChatOpenAI(
-            model="gpt-3.5-turbo",  
+            model="gpt-4o",  
             temperature=0.4,
             openai_api_key=self.OPENAI_API_KEY
         )
@@ -29,9 +29,10 @@ class OpenAIHandler:
                     - **Development**: `### 發展` [Add events, conflicts, or challenges.]
                     - **Conclusion**: `### 結局` [Resolve the story in a meaningful way.]
                 - Add tags: `### Tags` [Generate 3-5 tags relevant to the story's content in the format: `[tag1, tag2, tag3]` (e.g., `["AI", "Future", "Ethics"]`)].
-                - End with category: `### Category` The `category` should be one of the following: `[傳統技藝, 歷史方面, 佳餚食譜, 科技新知, 人生經驗, 其他]`
+                - End with category: `### Category\\n分類` The category should be one of: 傳統技藝, 歷史文化, 佳餚食譜, 科技新知, 人生經驗, 其他 (e.g., `### Category\\n傳統技藝`)
                 3. Write the story entirely in Chinese and ensure it remains closely tied to the provided context without straying off-topic.
                 4. Ensure vivid and engaging storytelling.
+                5. The context length is determined by the number of words in the context.
 
 Context: {context}
 
@@ -42,55 +43,32 @@ Begin writing in Markdown:
         else:
             prompt = ChatPromptTemplate.from_messages([
                 ("system", """
-                  You are a skilled and creative writer capable of summarizing and analyzing discussions into a well-structured article in Markdown format. Your task is to write a comprehensive article in Chinese based on the provided problem and responses from five different individuals.
+                  You are a skilled and creative writer capable of crafting vivid and engaging stories in Markdown format. Your task is to write a comprehensive article in Markdown based on the provided problem and responses, including relevant tags.
+                  Please follow these guidelines:
+                  1. Use Markdown formatting.
+                  2. Structure the story as follows:
+                  - The first section should be the title: `# {problem}` The title is the user's input problem.
+                  - The second section should be the description: `## Description\\n[描述]` A brief summary of the core idea, 15-30 words.
+                  - Divide the story into three sections:
+                      - **Introduction**: `### 引言` [Briefly introduce the problem and its importance.]
+                      - **Development**: `### 發展` [Summarize and analyze the key points from responses.]
+                      - **Conclusion**: `### 結局` [Provide thoughtful conclusions and insights.]
+                  - Add tags: `### Tags` [Generate 3-5 tags relevant to the story's content in the format: `[tag1, tag2, tag3]` (e.g., `["AI", "Future", "Ethics"]`)].
+                  3. Write the article entirely in Chinese and ensure it:
+                      - Maintains a clear and engaging tone
+                      - Uses vivid descriptions and real-life examples
+                      - Presents balanced viewpoints
+                      - Avoids technical jargon
+                      - Connects ideas smoothly
+                  4. Ensure thoughtful analysis and insights.
+                  5. Keep the focus on the main topic and key discussion points.
 
-                    ### Guidelines:
+                  ### Provided Context:
+                  - Problem: {problem}
+                  - Category: {category}
+                  - Responses: {answer}
 
-                    #### 1. **Structure**:
-                    - **Introduction**:
-                    - Briefly introduce the problem, provide context, and explain why this topic is important or relevant.
-                    - Set the tone for the discussion, hinting at the diversity of opinions or the depth of the issue.
-
-                    - **Main Body**:
-                    - Summarize the key points from the responses.
-                    - Group similar ideas together under subheadings for clarity.
-                    - Highlight unique perspectives and mention any contrasting opinions to present a balanced view.
-                    - Use smooth transitions between different viewpoints to maintain a logical and cohesive flow.
-
-                    - **Conclusion**:
-                    - Provide a thoughtful summary of the discussion, synthesizing the main insights.
-                    - Offer your own reflection, potential solutions, or thought-provoking questions to leave the reader with something to ponder.
-
-                    #### 2. **Style**:
-                    - Write in a **clear**, **engaging**, and **neutral tone** to ensure accessibility and professionalism.
-                    - Use vivid descriptions, **cultural references**, or **real-life examples** to enrich the content.
-                    - Maintain a balanced view, giving equal attention to all perspectives.
-
-                    #### 3. **Formatting**:
-                    - Use **Markdown** to structure the article:
-                 - The first line should be the title: `# [title]`
-                - Follow it with the description: `## [description]` 
-                - Subheadings with `###`
-                - Lists with `-` for concise points.
-                - Use **bold** or *italic* text to emphasize key ideas.
-                - Ensure proper formatting for readability and organization.
-                - End with tags: `### Tags` [Generate 3-5 tags relevant to the story's content in the format: `[tag1, tag2, tag3]` (e.g., `["AI", "Future", "Ethics"]`)].
-                 
-                    #### 4. **Creativity**:
-                    - Use metaphors, analogies, or storytelling techniques to make the article engaging and relatable.
-                    - Avoid overly technical jargon; simplify complex ideas with creative explanations.
-
-                  - The `title` should be short, evocative, and capture the essence of the story (7-10 characters recommended).
-                - The `description` should summarize the story's core idea or mood in 15-30 characters.
-                 
-                    ### Provided Context:
-                    - **Problem**: {problem}
-                    - **Category**: {category}
-                    - **Responses**: 
-                    {answer}
-
-                    ### Write the article in Markdown format:
-
+                  Begin writing in Markdown:
                 """)
             ])
 

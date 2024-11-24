@@ -16,7 +16,8 @@ def handle_postback_event(event):
         if add_user(event, generation):
             respond_message(event, f"註冊成功！")
         else:
-            respond_message(event, "發生錯誤，請再試一次")
+            debug_richmenu(event)
+            respond_message(event, "您已經註冊過了！跳轉到主頁")
     
     elif action == "choose_article":
         select = data.get('select')

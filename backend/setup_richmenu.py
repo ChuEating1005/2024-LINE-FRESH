@@ -45,8 +45,8 @@ def rich_menu_object_signup_json():
                 },
                 "action": {
                     "type": "postback",
-                    "data": "action=choose_generation&generation=青世代",
-                    "displayText": "青世代"
+                    "data": "action=choose_generation&generation=銀世代",
+                    "displayText": "銀世代"
                 }
             },
             {
@@ -58,8 +58,8 @@ def rich_menu_object_signup_json():
                 },
                 "action": {
                     "type": "postback",
-                    "data": "action=choose_generation&generation=銀世代",
-                    "displayText": "銀世代"
+                    "data": "action=choose_generation&generation=青世代",
+                    "displayText": "青世代"
                 }
             }
         ]
@@ -252,7 +252,7 @@ def rich_menu_object_questiontopic_json():
                     "type": "postback",
                     "data": "action=ask_question_topic",
                     "inputOption": "openKeyboard",
-                    "fillInText": "主題：歷史方面\n你的問題："
+                    "fillInText": "主題：歷史文化\n你的問題："
                 }
             },
             {
@@ -356,7 +356,7 @@ def rich_menu_object_answertopic_json():
                 },
                 "action": {
                     "type": "message",
-                    "text": "查看主題:歷史方面"
+                    "text": "查看主題:歷史文化"
                 }
             },
             {

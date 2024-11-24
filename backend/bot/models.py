@@ -10,7 +10,7 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.display_name}: ({self.age_group})"
+        return f"{self.display_name}"
 
 class AudioMessage(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
@@ -40,7 +40,7 @@ class Question(models.Model):
     content = models.TextField()
     category = models.CharField(max_length=50, choices=[
         ('傳統技藝', '傳統技藝'),
-        ('歷史方面', '歷史方面'),
+        ('歷史文化', '歷史文化'),
         ('佳餚食譜', '佳餚食譜'),
         ('科技新知', '科技新知'),
         ('人生經驗', '人生經驗'),
@@ -64,7 +64,7 @@ class Article(models.Model):
     cover = models.URLField(null=True, blank=True)
     category = models.CharField(max_length=50, choices=[
         ('傳統技藝', '傳統技藝'),
-        ('歷史方面', '歷史方面'),
+        ('歷史文化', '歷史文化'),
         ('佳餚食譜', '佳餚食譜'),
         ('科技新知', '科技新知'),
         ('人生經驗', '人生經驗'),
@@ -73,6 +73,7 @@ class Article(models.Model):
     tags = models.JSONField(default=list)
     input_text = models.TextField(default="")
     likes = models.IntegerField(default=0)
+    liked_by = models.JSONField(default=list, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
