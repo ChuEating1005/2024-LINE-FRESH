@@ -1,4 +1,4 @@
-# 青銀故事屋 YSto
+# 青銀故事屋 YStoryHouse
 
 LINE FRESH 2024 技術新星計畫 第八組：爆爆源
 
