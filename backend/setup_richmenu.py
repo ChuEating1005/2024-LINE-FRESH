@@ -18,11 +18,13 @@ from linebot.v3.messaging import (
 )
 
 channel_access_token = config('LINE_ACCESS_TOKEN')
+liff_id = config('LIFF_ID')
 
 configuration = Configuration(
     access_token=channel_access_token
 )
 
+image_path = './static/richmenu/'
 
 def rich_menu_object_signup_json():
     return {
@@ -94,9 +96,9 @@ def rich_menu_object_article_json():
                     "height": 1486
                 },
                 "action": {
-                    "type": "postback",
-                    "data": "action=choose_article&select=所有文章",
-                    "displayText": "所有文章"
+                    "type": "uri",
+                    "uri": f"https://liff.line.me/{liff_id}",
+                    "label": "所有文章"
                 }
             },
             {
@@ -264,7 +266,7 @@ def rich_menu_object_questiontopic_json():
                     "type": "postback",
                     "data": "action=ask_question_topic",
                     "inputOption": "openKeyboard",
-                    "fillInText": "主題：健康養生\n你的問題："
+                    "fillInText": "主題：科技新知\n你的問題："
                 }
             },
             {
@@ -366,7 +368,7 @@ def rich_menu_object_answertopic_json():
                 },
                 "action": {
                     "type": "message",
-                    "text": "查看主題:健康養生"
+                    "text": "查看主題:科技新知"
                 }
             },
             {
@@ -407,6 +409,8 @@ def create_action(action):
             return PostbackAction(data=action.get('data'))
     elif action['type'] == 'message':
         return MessageAction(text=action.get('text'))
+    elif action['type'] == 'uri':
+        return URIAction(uri=action.get('uri'), label=action.get('label'))
     else:
         return RichMenuSwitchAction(
             rich_menu_alias_id=action.get('richMenuAliasId'),
@@ -463,7 +467,7 @@ def main():
         ).rich_menu_id
 
         # Upload image to rich menu signup
-        with open('./static/richmenu-signup.png', 'rb') as image:
+        with open(image_path + 'richmenu-signup.png', 'rb') as image:
             line_bot_blob_api.set_rich_menu_image(
                 rich_menu_id=rich_menu_signup_id,
                 body=bytearray(image.read()),
@@ -499,7 +503,7 @@ def main():
         ).rich_menu_id
 
         # Upload image to rich menu signup
-        with open('./static/richmenu-article.png', 'rb') as image:
+        with open(image_path + 'richmenu-article.png', 'rb') as image:
             line_bot_blob_api.set_rich_menu_image(
                 rich_menu_id=rich_menu_article_id,
                 body=bytearray(image.read()),
@@ -536,7 +540,7 @@ def main():
         ).rich_menu_id
 
         # Upload image to rich menu main
-        with open('./static/richmenu-main.png', 'rb') as image:
+        with open(image_path + 'richmenu-main.png', 'rb') as image:
             line_bot_blob_api.set_rich_menu_image(
                 rich_menu_id=rich_menu_main_id,
                 body=bytearray(image.read()),
@@ -572,7 +576,7 @@ def main():
         ).rich_menu_id
 
         # Upload image to rich menu question topic
-        with open('./static/richmenu-topic.png', 'rb') as image:
+        with open(image_path + 'richmenu-topic.png', 'rb') as image:
             line_bot_blob_api.set_rich_menu_image(
                 rich_menu_id=rich_menu_questiontopic_id,
                 body=bytearray(image.read()),
@@ -609,7 +613,7 @@ def main():
 
 
         # Upload image to rich menu answer topic    
-        with open('./static/richmenu-topic.png', 'rb') as image:
+        with open(image_path + 'richmenu-topic.png', 'rb') as image:
             line_bot_blob_api.set_rich_menu_image(
                 rich_menu_id=rich_menu_answertopic_id,
                 body=bytearray(image.read()),

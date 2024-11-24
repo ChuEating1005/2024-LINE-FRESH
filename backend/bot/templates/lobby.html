@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>青銀故事屋</title>
+    <style>
+      /* 基本樣式 */
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background: #f9f9f9;
+        color: #333;
+      }
+
+      /* Header 樣式 */
+      /* Header 樣式 */
+      header {
+        background: #c8b6a6;
+        color: #333;
+        padding: 10px 20px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      /* 使用 Flexbox 排列 Header 內容 */
+      .header-container {
+        width: 100%;
+        display: flex; /* 開啟 Flexbox 佈局 */
+        justify-content: space-between; /* 左右兩邊元素對齊 */
+        align-items: center; /* 確保垂直方向居中對齊 */
+      }
+
+      /* 標題樣式 */
+      header h1 {
+        font-size: 1.5rem;
+        margin: 0; /* 移除多餘的邊距 */
+      }
+
+      /* Menu 圖標樣式 */
+      .menu-icon {
+        width: 24px;
+        height: 24px;
+        cursor: pointer; /* 顯示點擊效果的指標 */
+        margin: 0; /* 確保圖標與標題完全水平 */
+      }
+
+      /* 關於我們 */
+      #about {
+        padding-left: 20px;
+        margin-bottom: 5px;
+      }
+
+      #about h2 {
+        font-size: 1.5rem;
+        margin-bottom: 2px; /* 縮小標題與文字之間的間距 */
+      }
+
+      .intro-line {
+        height: 1px; /* 線條高度 */
+        width: 100px;
+        background-color: black; /* 線條顏色 */
+        margin: 2px 0; /* 縮短標題與說明文字之間的距離 */
+      }
+
+      .about-text-container {
+        width: 259px;
+        padding: 5px;
+        background: transparent; /* 背景透明 */
+        border: none; /* 邊框透明 */
+        margin-top: 2px; /* 確保文字容器緊貼標題 */
+      }
+
+      .about-text-container p {
+        margin-bottom: 5px;
+        text-align: justify;
+        font-size: 1.1rem;
+      }
+
+      #generation{
+        margin-bottom: 5px;
+      }
+
+      #generation h2{
+        margin-left: 20px;
+        font-size: 1.5rem;
+        margin-bottom: 2px; /* 縮小標題與文字之間的間距 */
+      } 
+
+      .generation-line {
+        margin-left: 20px;
+        height: 1px; /* 線條高度 */
+        width: 180px;
+        background-color: black; /* 線條顏色 */
+      }
+
+      .chart{
+        display: flex;
+        justify-content: center;
+      }
+
+      /* 文章列表 */
+      #article-list {
+        margin-bottom: 5px;
+      }
+
+      #article-list h2 {
+        margin-left: 20px;
+        font-size: 1.5rem;
+        margin-bottom: 10px; /* 控制標題與後面內容的間距 */
+      }
+
+      .divider {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 90%;
+        height: 1px;
+        background-color: black;
+        margin: 10px auto;
+      }
+
+      /* 主題部分 */
+      .topic-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .topic-container.reverse {
+        flex-direction: row-reverse; /* 左右對調 */
+      }
+
+      .topic-image {
+        width: 156px;
+        height: 182px;
+        object-fit: cover; /* 確保圖片不會變形 */
+      }
+
+      .topic-text {
+        text-align: left;
+        max-width: 400px; /* 限制文字寬度 */
+      }
+
+      .topic-text h3 {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      .topic-divider {
+        width: 80%;
+        height: 1.5px;
+        background-color: black; /* 線條顏色 */
+        margin: 8px 0; /* 控制線條與文字的間距 */
+      }
+
+      .topic-text p {
+        max-width: 141px; /* 限制說明文字框的最大寬度 */
+        font-size: 0.9rem;
+        color: #333;
+        margin: 10px 0 0;
+      }
+
+      /* 文章列表 */
+      .article-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative; /* 父容器設為相對定位 */
+      }
+
+      .arrow {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        position: absolute; /* 使用絕對定位確保箭頭對稱 */
+        top: 50%;
+        transform: translateY(-80%); /* 垂直居中 */
+      }
+
+      .left-arrow {
+        left: 20px; /* 靠左對齊，距離調整 */
+      }
+
+      .right-arrow {
+        right: 20px; /* 靠右對齊，距離調整 */
+      }
+
+      .article-list {
+        display: flex;
+        gap: 10px; /* 控制文章項目之間的間距 */
+        overflow: hidden; /* 隱藏超出範圍的內容 */
+        width: 280px; /* 確保同時顯示兩篇文章（130*2 + gap） */
+        padding-bottom: 10px;
+      }
+
+      .article-item {
+        flex: 0 0 130px; /* 固定每個文章項目的寬度 */
+        text-align: center;
+        border: 1px solid rgba(68, 67, 67, 0.434);
+        border-radius: 5px;
+        box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2);
+        padding-bottom: 10px;
+      }
+
+      .article-item img {
+        width: 130px;
+        height: 130px;
+        object-fit: cover; /* 確保圖片比例正確 */
+      }
+
+      .article-title {
+        font-size: 1rem;
+        font-weight: bold;
+        margin: 5px 0 0;
+      }
+
+      .article-author {
+        font-size: 0.9rem;
+        color: #666;
+        margin: 2px 0 0;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+      let userId = null;
+      let userName = null;
+      let liffId = "{{ liff_id }}"; // Get LIFF ID from Django context
+
+      function initializeLiff() {
+        liff
+          .init({ liffId: liffId })
+          .then(() => {
+            document.getElementById("scanButton").disabled = false;
+            if (liff.isLoggedIn()) {
+              getUserProfile(1);
+            } else {
+              liff.login();
+            }
+          })
+          .catch((err) => {
+            console.error("LIFF Initialization failed", err);
+          });
+      }
+
+      function getUserProfile(scan) {
+        liff
+          .getProfile()
+          .then((profile) => {
+            userId = profile.userId;
+            userName = profile.displayName;
+            console.log("User ID: " + userId);
+            console.log("User Name: " + userName);
+          })
+          .catch((err) => {
+            console.error("Error getting user profile", err);
+          });
+      }
+
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+          const cookies = document.cookie.split(";");
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              );
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+
+      function closeWindow() {
+        liff.closeWindow();
+      }
+
+      window.onload = initializeLiff;
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const leftArrows = document.querySelectorAll(".left-arrow");
+        const rightArrows = document.querySelectorAll(".right-arrow");
+        const articleLists = document.querySelectorAll(".article-list");
+
+        articleLists.forEach((list) => {
+          const articles = Array.from(list.children);
+          let currentIndex = 0;
+
+          // 只顯示前兩篇文章
+          updateVisibleArticles();
+
+          function updateVisibleArticles() {
+            articles.forEach((article, index) => {
+              if (
+                index === currentIndex ||
+                index === (currentIndex + 1) % articles.length
+              ) {
+                article.style.display = "block";
+              } else {
+                article.style.display = "none";
+              }
+            });
+          }
+
+          // 找到對應的箭頭
+          const topic = list.dataset.topic;
+          const leftArrow = document.querySelector(
+            `.left-arrow[data-topic="${topic}"]`
+          );
+          const rightArrow = document.querySelector(
+            `.right-arrow[data-topic="${topic}"]`
+          );
+
+          leftArrow.addEventListener("click", () => {
+            currentIndex =
+              (currentIndex - 1 + articles.length) % articles.length;
+            updateVisibleArticles();
+          });
+
+          rightArrow.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % articles.length;
+            updateVisibleArticles();
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <h1>青銀故事屋</h1>
+        <i class="material-icons menu-icon">menu</i>
+      </div>
+    </header>
+
+    <main>
+      <section id="about">
+        <h2>關於我們</h2>
+        <div class="intro-line"></div>
+        <div class="about-text-container">
+          <p>
+            我們是一群來自陽明交通大學的學生，在與家中長輩聊天時，發現長輩們有許多的故事值得被保留與傳承，同時我們也一樣對年輕人的文化保存有好奇。
+          </p>
+          <p>因此，我們創建了這個平台，讓這樣的延續與交流被記憶與流傳。</p>
+        </div>
+      </section>
+
+      <section id="generation">
+        <h2>你屬於哪個世代</h2>
+        <div class="generation-line"></div>
+        <div class="chart">
+            <img style="margin-top: 30px;" src="https://firebasestorage.googleapis.com/v0/b/linefresh-2024.firebasestorage.app/o/images%2Fimg_list%2Fgen.svg?alt=media&token=b5386b79-f5ef-49cc-9939-20bc404a6b59" alt="">
+        </div>
+      </section>
+
+      <section id="article-list">
+        <!-- 標題 -->
+        <h2>文章列表</h2>
+        <div class="divider"></div>
+        {% for topic, articles in articles.items %} {% if topic == "傳統技藝" %}
+        <div class="topic-container">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/linefresh-2024.firebasestorage.app/o/images%2Fimg_list%2F1.png?alt=media&token=be508a88-072f-4322-b3f1-3159ac037db6"
+            alt="Traditional Topic Image"
+            class="topic-image"
+          />
+          <div class="topic-text">
+            <h3>傳統技藝</h3>
+            <div class="topic-divider"></div>
+            <p>
+              傳統技藝是文化傳承的象徵，這些技藝蘊含著世代智慧與藝術價值。將珍貴的手藝藉由文章傳遞，讓傳統在現代重焕生機。
+            </p>
+          </div>
+        </div>
+        <div class="article-container">
+          <i class="material-icons arrow left-arrow" data-topic="傳統技藝"
+            >arrow_circle_left</i
+          >
+          <div class="article-list" data-topic="傳統技藝">
+            {% for article in articles %}
+            <div class="article-item">
+              <a
+                href="{% url 'article_detail' article.id %}"
+                class="block hover:opacity-90 transition-opacity"
+              >
+                {% if article.cover %}
+                <img
+                  src="{{ article.cover }}"
+                  alt="article image"
+                  class="w-full h-auto"
+                />
+                {% endif %}
+                <h3 class="article-title">{{ article.title }}</h3>
+                <p class="article-author">{{ article.author }}</p>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+          <i class="material-icons arrow right-arrow" data-topic="傳統技藝"
+            >arrow_circle_right</i
+          >
+        </div>
+        {% elif topic == "歷史方面" %}
+        <div class="topic-container">
+          <div class="topic-text">
+            <h3>歷史文化</h3>
+            <div class="topic-divider"></div>
+            <p>
+              歷史文化是民族的根基，記錄著重要的故事與價值觀。這些文化底蘊都能成為世代交流的橋梁，也是重要的文化資產。
+            </p>
+          </div>
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/linefresh-2024.firebasestorage.app/o/images%2Fimg_list%2F2.png?alt=media&token=9d3bfda2-c421-4deb-b78b-e6417ccecefc"
+            alt="History Topic Image"
+            class="topic-image"
+          />
+        </div>
+        <div class="article-container">
+          <i class="material-icons arrow left-arrow" data-topic="歷史文化"
+            >arrow_circle_left</i
+          >
+          <div class="article-list" data-topic="歷史文化">
+            {% for article in articles %}
+            <div class="article-item">
+              <a
+                href="{% url 'article_detail' article.id %}"
+                class="block hover:opacity-90 transition-opacity"
+              >
+                {% if article.cover %}
+                <img
+                  src="{{ article.cover }}"
+                  alt="article image"
+                  class="w-full h-auto"
+                />
+                {% endif %}
+                <h3 class="article-title">{{ article.title }}</h3>
+                <p class="article-author">{{ article.author }}</p>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+          <i class="material-icons arrow right-arrow" data-topic="歷史文化"
+            >arrow_circle_right</i
+          >
+        </div>
+        {% elif topic == "佳餚食譜" %}
+        <div class="topic-container">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/linefresh-2024.firebasestorage.app/o/images%2Fimg_list%2F3.png?alt=media&token=d2b4e8c7-1e12-47cf-a600-59a27f87f941"
+            alt="Food Topic Image"
+            class="topic-image"
+          />
+          <div class="topic-text">
+            <h3>佳餚食譜</h3>
+            <div class="topic-divider"></div>
+            <p>
+              美食是情感的紐帶，記錄著重要的味道與地方特色。佳餚食譜不僅連結了味蕾，更也讓美味在每個廚房中得以延續。
+            </p>
+          </div>
+        </div>
+        <div class="article-container">
+          <i class="material-icons arrow left-arrow" data-topic="佳餚食譜"
+            >arrow_circle_left</i
+          >
+          <div class="article-list" data-topic="佳餚食譜">
+            {% for article in articles %}
+            <div class="article-item">
+              <a
+                href="{% url 'article_detail' article.id %}"
+                class="block hover:opacity-90 transition-opacity"
+              >
+                {% if article.cover %}
+                <img
+                  src="{{ article.cover }}"
+                  alt="article image"
+                  class="w-full h-auto"
+                />
+                {% endif %}
+                <h3 class="article-title">{{ article.title }}</h3>
+                <p class="article-author">{{ article.author }}</p>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+          <i class="material-icons arrow right-arrow" data-topic="佳餚食譜"
+            >arrow_circle_right</i
+          >
+        </div>
+        {% elif topic == "人生經驗" %}
+        <div class="topic-container">
+          <div class="topic-text">
+            <h3>人生經驗</h3>
+            <div class="topic-divider"></div>
+            <p>
+              人生經驗是寶貴的智慧庫。無論是生活哲學、應對挑戰以及成功與失敗的故事，都是專屬生命的重要篇章。
+            </p>
+          </div>
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/linefresh-2024.firebasestorage.app/o/images%2Fimg_list%2F4.png?alt=media&token=c1d7f025-1526-49e8-86fc-ae07a6702128"
+            alt="Life Topic Image"
+            class="topic-image"
+          />
+        </div>
+        <div class="article-container">
+          <i class="material-icons arrow left-arrow" data-topic="人生經驗"
+            >arrow_circle_left</i
+          >
+          <div class="article-list" data-topic="人生經驗">
+            {% for article in articles %}
+            <div class="article-item">
+              <a
+                href="{% url 'article_detail' article.id %}"
+                class="block hover:opacity-90 transition-opacity"
+              >
+                {% if article.cover %}
+                <img
+                  src="{{ article.cover }}"
+                  alt="article image"
+                  class="w-full h-auto"
+                />
+                {% endif %}
+                <h3 class="article-title">{{ article.title }}</h3>
+                <p class="article-author">{{ article.author }}</p>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+          <i class="material-icons arrow right-arrow" data-topic="人生經驗"
+            >arrow_circle_right</i
+          >
+        </div>
+        {% elif topic == "科技新知" %}
+        <div class="topic-container">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/linefresh-2024.firebasestorage.app/o/images%2Fimg_list%2F5.png?alt=media&token=0c7b298b-65f0-4003-bddd-05ce9cf43863"
+            alt="Tech Topic Image"
+            class="topic-image"
+          />
+          <div class="topic-text">
+            <h3>科技新知</h3>
+            <div class="topic-divider"></div>
+            <p>
+              科技是現代生活的驅動力，青世代熟悉數位技術，銀世代則對新科技抱有學習熱情。科技世界將為不同世代帶來改變。
+            </p>
+          </div>
+        </div>
+        <div class="article-container">
+          <i class="material-icons arrow left-arrow" data-topic="科技新知"
+            >arrow_circle_left</i
+          >
+          <div class="article-list" data-topic="科技新知">
+            {% for article in articles %}
+            <div class="article-item">
+              <a
+                href="{% url 'article_detail' article.id %}"
+                class="block hover:opacity-90 transition-opacity"
+              >
+                {% if article.cover %}
+                <img
+                  src="{{ article.cover }}"
+                  alt="article image"
+                  class="w-full h-auto"
+                />
+                {% endif %}
+                <h3 class="article-title">{{ article.title }}</h3>
+                <p class="article-author">{{ article.author }}</p>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+          <i class="material-icons arrow right-arrow" data-topic="科技新知"
+            >arrow_circle_right</i
+          >
+        </div>
+        {% elif topic == "其他" %}
+        <div class="topic-container">
+          <div class="topic-text">
+            <h3>其他</h3>
+            <div class="topic-divider"></div>
+            <p>
+              人們對生命的體驗不侷限在一定的區塊，在這個主題，一切意想不到都將可能為別的生命併發新的體驗。
+            </p>
+          </div>
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/linefresh-2024.firebasestorage.app/o/images%2Fimg_list%2F6.png?alt=media&token=3754ecb8-f59a-4d2b-a37b-40352bbbec7a"
+            alt="Other Topic Image"
+            class="topic-image"
+          />
+        </div>
+        <div class="article-container">
+          <i class="material-icons arrow left-arrow" data-topic="其他"
+            >arrow_circle_left</i
+          >
+          <div class="article-list" data-topic="其他">
+            {% for article in articles %}
+            <div class="article-item">
+              <a
+                href="{% url 'article_detail' article.id %}"
+                class="block hover:opacity-90 transition-opacity"
+              >
+                {% if article.cover %}
+                <img
+                  src="{{ article.cover }}"
+                  alt="article image"
+                  class="w-full h-auto"
+                />
+                {% endif %}
+                <h3 class="article-title">{{ article.title }}</h3>
+                <p class="article-author">{{ article.author }}</p>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+          <i class="material-icons arrow right-arrow" data-topic="其他"
+            >arrow_circle_right</i
+          >
+        </div>
+        {% endif %}
+
+        <div class="divider"></div>
+        {% endfor %}
+      </section>
+    </main>
+  </body>
+</html>

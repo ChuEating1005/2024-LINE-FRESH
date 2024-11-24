@@ -16,10 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from bot import views
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('bot/', include('bot.urls')),
-    path('', views.info, name='info'),  # 列出文章標題
-    path('article/<int:article_id>/', views.article_detail, name='article_detail'),  # 顯示文章內容
 ]

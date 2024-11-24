@@ -1,5 +1,6 @@
 from decouple import config
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,10 +11,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
+
+# Line Settings
 LINE_ACCESS_TOKEN = config('LINE_ACCESS_TOKEN')
 LINE_CHANNEL_SECRET = config('LINE_CHANNEL_SECRET')
+LIFF_ID = config('LIFF_ID')
+
+# Firebase Settings
+FIREBASE_PROJECT_ID = config('FIREBASE_PROJECT_ID')
+FIREBASE_PRIVATE_KEY = config('FIREBASE_PRIVATE_KEY')
+FIREBASE_CLIENT_EMAIL = config('FIREBASE_CLIENT_EMAIL')
+FIREBASE_STORAGE_BUCKET = config('FIREBASE_STORAGE_BUCKET')
+
+# OpenAI Settings
 OPENAI_API_KEY = config('OPENAI_API_KEY')
+
+# Audio Settings
 AUDIO_KEY = config('AUDIO_KEY')
+
 CURRENT_BASE_URL = config('CURRENT_BASE_URL')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -26,7 +41,6 @@ CSRF_TRUSTED_ORIGINS = [
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

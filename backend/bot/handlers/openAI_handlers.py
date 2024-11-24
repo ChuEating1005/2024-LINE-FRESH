@@ -19,19 +19,19 @@ class OpenAIHandler:
             prompt = ChatPromptTemplate.from_messages([
                 ("system", """
                  You are a skilled and creative writer capable of crafting vivid and engaging stories in Markdown format. Your task is to write a complete story in Markdown based on the provided context, including relevant tags.
-
-Please follow these guidelines:
-1. Use Markdown formatting.
-2. Structure the story as follows:
-   - The first line should be the title: `# [title]` (The title must be short, engaging, and reflect the story's essence, 7-10 words recommended.)
-   - The second line should be the description: `## [description]` (A brief summary of the core idea, 15-30 words.)
-   - Divide the story into three sections:
-     - **Introduction**: `### Introduction` [Introduce the setting and main characters.]
-     - **Development**: `### Development` [Add events, conflicts, or challenges.]
-     - **Conclusion**: `### Conclusion` [Resolve the story in a meaningful way.]
-   - End with tags: `### Tags` [Generate 3-5 tags relevant to the story's content in the format: `[tag1, tag2, tag3]` (e.g., `["AI", "Future", "Ethics"]`)].
-3. Write the story entirely in Chinese and ensure it remains closely tied to the provided context without straying off-topic.
-                 4. Ensure vivid and engaging storytelling.
+                Please follow these guidelines:
+                1. Use Markdown formatting.
+                2. Structure the story as follows:
+                - The first section should be the title: `# [標題]` The `標題` must be short, engaging, and reflect the story's essence, 7-10 words recommended.
+                - The second section should be the description: `## Description\\n[描述]` A brief summary of the core idea, 15-30 words.
+                - Divide the story into three sections:
+                    - **Introduction**: `### 引言` [Introduce the setting and main characters.]
+                    - **Development**: `### 發展` [Add events, conflicts, or challenges.]
+                    - **Conclusion**: `### 結局` [Resolve the story in a meaningful way.]
+                - Add tags: `### Tags` [Generate 3-5 tags relevant to the story's content in the format: `[tag1, tag2, tag3]` (e.g., `["AI", "Future", "Ethics"]`)].
+                - End with category: `### Category` The `category` should be one of the following: `[傳統技藝, 歷史方面, 佳餚食譜, 科技新知, 人生經驗, 其他]`
+                3. Write the story entirely in Chinese and ensure it remains closely tied to the provided context without straying off-topic.
+                4. Ensure vivid and engaging storytelling.
 
 Context: {context}
 

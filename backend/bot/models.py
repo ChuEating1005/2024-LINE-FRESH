@@ -42,7 +42,7 @@ class Question(models.Model):
         ('傳統技藝', '傳統技藝'),
         ('歷史方面', '歷史方面'),
         ('佳餚食譜', '佳餚食譜'),
-        ('健康養生', '健康養生'),
+        ('科技新知', '科技新知'),
         ('人生經驗', '人生經驗'),
         ('其他', '其他'),
     ])
@@ -61,14 +61,34 @@ class Article(models.Model):
     author = models.ForeignKey('User', on_delete=models.CASCADE)
     description = models.TextField()
     content = models.TextField()
-    image_url = models.URLField(default="")
+    cover = models.URLField(null=True, blank=True)
+    category = models.CharField(max_length=50, choices=[
+        ('傳統技藝', '傳統技藝'),
+        ('歷史方面', '歷史方面'),
+        ('佳餚食譜', '佳餚食譜'),
+        ('科技新知', '科技新知'),
+        ('人生經驗', '人生經驗'),
+        ('其他', '其他'),
+    ])
     tags = models.JSONField(default=list)
     input_text = models.TextField(default="")
     likes = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.title}"
 
 class Comment(models.Model):
     article = models.ForeignKey('Article', on_delete=models.CASCADE)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Image(models.Model):
+    article = models.ForeignKey('Article', on_delete=models.CASCADE)
+    number = models.IntegerField()
+    image_url = models.URLField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Image {self.number} of {self.article.title}"

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, AudioMessage, Conversation, Question, Answer, Article, Comment
+from .models import User, AudioMessage, Conversation, Question, Answer, Article, Comment, Image
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
@@ -46,3 +46,9 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ['id', 'article', 'user', 'created_at']
     list_filter = ['created_at']
     search_fields = ['article__title', 'user__line_id']
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ['id', 'article', 'image_url', 'created_at']
+    list_filter = ['created_at']
+    search_fields = ['article__title']

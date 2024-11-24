@@ -15,7 +15,7 @@ from .handlers.audio_handler import process_audio_message
 from .handlers.postback_handlers import handle_postback_event
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
 
-from .handlers.utils import list_all_article, get_article_by_id
+from .handlers.utils import list_all_article_by_topic, get_article_by_id
 from django.shortcuts import render
 import markdown
 
@@ -49,12 +49,19 @@ def handle_postback(event):
     handle_postback_event(event)
 
 @csrf_exempt
-def info(request):
-    articles = list_all_article()
-    return render(request, 'info.html', {'articles': articles})
+def article_list(request):
+    articles = {}
+    for topic in ['傳統技藝', '歷史方面', '佳餚食譜', '人生經驗', '科技新知', '其他']:
+        articles[topic] = list_all_article_by_topic(topic)
+    liff_id = settings.LIFF_ID 
+    base_url = settings.STATIC_URL 
+    return render(request, 'lobby.html', {
+        'articles': articles, 
+        'liff_id': liff_id,
+        'base_url': base_url
+    })
 
 @csrf_exempt
 def article_detail(request, article_id):
     article = get_article_by_id(article_id)
-    article_content = markdown.markdown(article["content"])
-    return render(request, 'article.html', {'article': article, 'content': article_content})
+    return render(request, 'article.html', {'article': article})

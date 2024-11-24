@@ -112,3 +112,5 @@ venv.bak/
 # Windows
 Thumbs.db
 ehthumbs.db
+
+serviceAccountKey.json
