@@ -1,0 +1,187 @@
+/* Reset 基本樣式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+  color: #333;
+}
+
+/* Header 樣式 */
+header {
+  background: #c8b6a6;
+  color: #333;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+.home-link {
+  display: inline-block; /* 讓連結變成按鈕 */
+  background-color: #000; /* 黑色背景 */
+  color: #fff; /* 白色文字 */
+  padding: 8px 16px; /* 增加內邊距 */
+  text-decoration: none; /* 去掉下劃線 */
+  font-size: 0.9rem; /* 調整字體大小 */
+  font-weight: bold; /* 加粗字體 */
+  border-radius: 8px; /* 圓角效果 */
+  transition: background-color 0.3s ease; /* 增加過渡效果 */
+}
+
+.home-link:hover {
+  background-color: #333; /* 滑鼠懸停時改變背景顏色 */
+}
+
+/* Main 內容區 */
+main {
+  padding: 20px 15px;
+}
+
+/* 文章樣式 */
+article {
+  margin-bottom: 30px;
+}
+
+#article-title {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+#article-author-time {
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  white-space: pre-line; /* 保留文本中的換行符 */
+  line-height: 1.4; /* 調整行距使顯示更美觀 */
+}
+
+/* 圖片樣式：確保圖片自適應大小 */
+#article-content img,
+.related-item img {
+  max-width: 100%; /* 圖片的最大寬度限制為容器寬度 */
+  height: auto; /* 高度自動，保持圖片比例 */
+  display: block; /* 讓圖片塊級排列，避免與其他元素衝突 */
+  margin: 10px auto; /* 圖片自動居中並添加間距 */
+  border-radius: 8px;
+}
+
+/* 相關文章區 */
+.related-articles h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.related-item {
+  text-align: center;
+}
+
+.related-item p {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  word-wrap: break-word;
+}
+
+/* TAG */
+/* Tag 容器樣式 */
+.tag-container {
+  display: flex;
+  flex-wrap: wrap; /* 如果超出寬度自動換行 */
+  gap: 8px; /* 每個 tag 之間的間距 */
+  margin: 6px 0 30px; /* 與周圍內容的間距 */
+}
+
+/* 單個 tag 的樣式 */
+.tag {
+  background-color: #e7ebe6;
+  color: #444444;
+  padding: 5px 10px; /* 內邊距 */
+  border-radius: 15px; /* 圓角效果 */
+  font-size: 0.8rem; /* 字體大小 */
+  white-space: nowrap; /* 避免文字換行 */
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* 過渡效果 */
+}
+
+/* Tag 懸停效果 */
+.tag:hover {
+  background-color: #d4c2b0; /* 懸停時的背景顏色 */
+  transform: scale(1.05); /* 放大一點點 */
+}
+
+/* 手機優化 */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  #article-title {
+    font-size: 1.5rem;
+  }
+
+  #article-author-time {
+    font-size: 0.85rem;
+  }
+
+  .related-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+
+  .home-link {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.2rem;
+  }
+
+  .home-link {
+    font-size: 0.8rem;
+  }
+
+  #article-title {
+    font-size: 1.2rem;
+  }
+
+  #article-author-time {
+    font-size: 0.8rem;
+  }
+
+  #article-content img {
+    margin: 15px 0;
+  }
+
+  .related-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}

@@ -1,0 +1,321 @@
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>青銀故事屋</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Noto+Serif+TC:wght@200..900&family=Zen+Old+Mincho&display=swap" rel="stylesheet">
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+        let userId = null;
+        let userName = null;
+        let liffId = "{{ liff_id }}"; // Get LIFF ID from Django context
+
+        function initializeLiff() {
+            liff
+            .init({ liffId: liffId })
+            .then(() => {
+                if (liff.isLoggedIn()) {
+                    getUserProfile();
+                } else {
+                    liff.login();
+                }
+            })
+            .catch((err) => {
+                console.error("LIFF Initialization failed", err);
+            });
+        }
+
+        // 在獲取用戶資料成功後更新用戶信息
+        function updateUserInfo(profile) {
+            const userNameElement = document.getElementById('userName');
+            const userPhotoElement = document.getElementById('userPhoto');
+            
+            if (userNameElement && userPhotoElement) {
+                userNameElement.textContent = profile.displayName;
+                userPhotoElement.src = profile.pictureUrl || 'default-avatar.png';
+            }
+        }
+
+        // 修改現有的 getUserProfile 函數
+        function getUserProfile() {
+            liff
+                .getProfile()
+                .then((profile) => {
+                    userId = profile.userId;
+                    userName = profile.displayName;
+                    updateUserInfo(profile);
+                })
+                .catch((err) => {
+                    console.error("Error getting user profile", err);
+                });
+        }
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === name + "=") {
+                cookieValue = decodeURIComponent(
+                    cookie.substring(name.length + 1)
+                );
+                break;
+                }
+            }
+            }
+            return cookieValue;
+        }
+
+        function closeWindow() {
+            liff.closeWindow();
+        }
+
+        function toggleNav() {
+            const nav = document.getElementById('sideNav');
+            const overlay = document.getElementById('overlay');
+            
+            if (nav.classList.contains('translate-x-full')) {
+                nav.classList.remove('translate-x-full');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                overlay.classList.add('opacity-50', 'pointer-events-auto');
+            } else {
+                nav.classList.add('translate-x-full');
+                overlay.classList.remove('opacity-50', 'pointer-events-auto');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+
+        window.onload = initializeLiff;
+
+        // 點擊遮罩層時關閉導航欄
+        document.getElementById('overlay').addEventListener('click', toggleNav);
+
+        // 點擊導航項目時也關閉導航欄
+        document.querySelectorAll('#sideNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                setTimeout(toggleNav, 150); // 延遲一下以確保跳轉效果更順暢
+            });
+        });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const leftArrows = document.querySelectorAll(".left-arrow");
+        const rightArrows = document.querySelectorAll(".right-arrow");
+        const articleLists = document.querySelectorAll(".article-list");
+
+        articleLists.forEach((list) => {
+          const articles = Array.from(list.children);
+          let currentIndex = 0;
+
+          // 只顯示前兩篇文章
+          updateVisibleArticles();
+
+          function updateVisibleArticles() {
+            articles.forEach((article, index) => {
+              if (
+                index === currentIndex ||
+                index === (currentIndex + 1) % articles.length
+              ) {
+                article.style.display = "block";
+              } else {
+                article.style.display = "none";
+              }
+            });
+          }
+
+          // 找到對應的箭頭
+          const topic = list.dataset.topic;
+          const leftArrow = document.querySelector(
+            `.left-arrow[data-topic="${topic}"]`
+          );
+          const rightArrow = document.querySelector(
+            `.right-arrow[data-topic="${topic}"]`
+          );
+
+          leftArrow.addEventListener("click", () => {
+            currentIndex =
+              (currentIndex - 1 + articles.length) % articles.length;
+            updateVisibleArticles();
+          });
+
+          rightArrow.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % articles.length;
+            updateVisibleArticles();
+          });
+        });
+      });
+    </script>
+    <style>
+        .zen-old-mincho-regular {
+            font-family: "Zen Old Mincho", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .lxgw-wenkai-tc-regular {
+            font-family: "LXGW WenKai TC", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .noto-serif-tc-regular {
+            font-family: "Noto Serif TC", serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+
+        /* 確保所有文字元素都使用這個字體 */
+        h1, h2, h3, h4, h5, h6, span {
+            font-family: "Noto Serif TC", serif;
+        }
+        p, a, button, input, textarea {
+            font-family: "LXGW WenKai TC", cursive;
+        }
+
+        html {
+            scroll-behavior: smooth; /* 啟用平滑滾動 */
+        }
+        
+        /* 為了補償 sticky header 的高度，避免標題被遮住 */
+        [id] {
+            scroll-margin-top: 4rem;
+        }
+    </style>
+  </head>
+  <body class="lxgw-wenkai-tc-regular bg-gray-50 text-gray-800 font-sans leading-relaxed m-0 p-0">
+    <header class="bg-[#c8b6a6] text-gray-800 px-5 py-2.5 sticky top-0 z-50">
+      <div class="w-full flex justify-between items-center">
+        <img src="https://firebasestorage.googleapis.com/v0/b/linefresh-2024.firebasestorage.app/o/images%2Fimg_list%2Ficon.png?alt=media&token=d4cf1b23-cbe2-4636-9121-3ac7317e9213" alt="青銀故事屋" class="zen-old-mincho-regular h-10 w-auto text-lg md:text-xl font-bold">
+        <i class="material-icons w-6 h-6 cursor-pointer m-0" onclick="toggleNav()">menu</i>
+      </div>
+    </header>
+
+    <div id="overlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-40" onclick="toggleNav()"></div>
+
+    <!-- 側邊導航欄 -->
+    <nav id="sideNav" class="fixed right-0 top-0 h-full w-64 bg-white transform translate-x-full transition-transform duration-300 ease-in-out shadow-lg z-50">
+        <div class="p-5">
+            <!-- 用戶資訊區 -->
+            <div class="flex items-center mb-8">
+                <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                    <img id="userPhoto" src="" alt="Profile" class="w-full h-full object-cover">
+                </div>
+                <div class="ml-3">
+                    <div id="userName" class="font-medium">Loading...</div>
+                    <div class="text-sm text-gray-500">讀者</div>
+                </div>
+            </div>
+
+            <!-- 主題導航選項 -->
+            <div class="space-y-4">
+                <a href="#傳統技藝" class="flex items-center space-x-3 text-gray-700 p-2 rounded-lg hover:bg-gray-100">
+                    <i class="material-icons">home</i>
+                    <span>傳統技藝</span>
+                </a>
+                <a href="#歷史文化" class="flex items-center space-x-3 text-gray-700 p-2 rounded-lg hover:bg-gray-100">
+                    <i class="material-icons">history_edu</i>
+                    <span>歷史文化</span>
+                </a>
+                <a href="#佳餚食譜" class="flex items-center space-x-3 text-gray-700 p-2 rounded-lg hover:bg-gray-100">
+                    <i class="material-icons">restaurant</i>
+                    <span>佳餚食譜</span>
+                </a>
+                <a href="#人生經驗" class="flex items-center space-x-3 text-gray-700 p-2 rounded-lg hover:bg-gray-100">
+                    <i class="material-icons">psychology</i>
+                    <span>人生經驗</span>
+                </a>
+                <a href="#科技新知" class="flex items-center space-x-3 text-gray-700 p-2 rounded-lg hover:bg-gray-100">
+                    <i class="material-icons">location_city</i>
+                    <span>科技新知</span>
+                </a>
+                <a href="#其他" class="flex items-center space-x-3 text-gray-700 p-2 rounded-lg hover:bg-gray-100">
+                    <i class="material-icons">more_horiz</i>
+                    <span>其他</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+      <section class="pl-5 mb-1.5 mt-3.5">
+        <h2 class="text-2xl mb-0.5 font-bold">關於我們</h2>
+        <div class="h-px w-[100px] bg-black my-0.5"></div>
+        <div class="w-[259px] p-1.5 bg-transparent mt-0.5">
+          <p class="mb-1.5 text-justify text-lg">
+            我們是一群來自陽明交通大學的學生，在與家中長輩聊天時，發現長輩們有許多的故事值得被保留與傳承，同時我們也一樣對年輕人的文化保存有好奇。
+          </p>
+          <p class="mb-1.5 text-justify text-lg">
+            因此，我們創建了這個平台，讓這樣的延續與交流被記憶與流傳。
+          </p>
+        </div>
+      </section>
+
+      <section class="mb-2.5">
+        <h2 class="ml-5 text-2xl mb-0.5 font-bold">你屬於哪個世代</h2>
+        <div class="ml-5 h-px w-[180px] bg-black"></div>
+        <div class="flex justify-center">
+          <img class="mt-7" src="https://firebasestorage.googleapis.com/v0/b/linefresh-2024.firebasestorage.app/o/images%2Fimg_list%2Fgen.svg?alt=media&token=42dd7a28-3a82-4a64-bbdc-9a595fee3d5d" alt="">
+        </div>
+      </section>
+
+      <section class="mb-5">
+        <h2 class="ml-5 text-2xl mb-2.5 font-bold">文章列表</h2>
+        <div class="w-[90%] h-px bg-black mx-auto my-2.5 mb-5"></div>
+
+        {% for topic, articles in articles.items %}
+        {% if not forloop.first %}
+        <div class="w-[90%] h-px bg-gray-800 mx-auto my-8"></div>
+        {% endif %}
+
+        <div id="{{ topic }}" class="flex justify-center items-center gap-5 mb-5 {% if topic in '歷史文化,人生經驗,其他' %}flex-row-reverse{% endif %}">
+          <img src="{{ topic_images|get_item:topic }}" 
+               alt="{{ topic }} Topic Image"
+               class="w-[156px] h-[182px] object-cover">
+          
+          <div class="text-left max-w-[400px]">
+            <h3 class="text-xl font-bold m-0">{{ topic }}</h3>
+            <div class="w-4/5 h-[1.5px] bg-black my-2"></div>
+            <p class="max-w-[130px] text-sm text-gray-800 mt-2.5 mb-0">
+              {{ topic_descriptions|get_item:topic }}
+            </p>
+          </div>
+        </div>
+
+        <div class="flex justify-center items-center relative">
+          <div class="flex gap-2.5 overflow-x-auto scrollbar-hide w-[280px] pb-2.5" data-topic="{{ topic }}">
+            {% for article in articles %}
+            <div class="flex-none w-[150px] h-[250px] text-center border border-gray-400/40 rounded-lg shadow-md overflow-hidden">
+                <a href="{% url 'article_detail' article.id %}" class="block hover:opacity-90 transition-opacity no-underline text-black h-full">
+                    {% if article.cover %}
+                    <div class="w-[150px] h-[150px] overflow-hidden">
+                        <img src="{{ article.cover }}" 
+                             alt="article image"
+                             class="w-full h-full object-cover rounded-t-lg">
+                    </div>
+                    {% endif %}
+                    <div class="p-2 flex flex-col justify-between h-[100px]">
+                        <h3 class="text-base font-bold line-clamp-2 mb-1 px-1">{{ article.title }}</h3>
+                        <p class="text-sm text-gray-600 m-0">{{ article.author }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </section>
+    </main>
+  </body>
+</html>

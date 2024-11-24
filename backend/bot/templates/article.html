@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }}</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Noto+Serif+TC:wght@200..900&display=swap" rel="stylesheet">
+    <style>
+        /* 確保 hover 效果在所有狀態下都有效 */
+        #likeButton:hover .material-icons {
+            color: white;
+        }
+
+        .lxgw-wenkai-tc-regular {
+            font-family: "LXGW WenKai TC", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .noto-serif-tc-regular {
+            font-family: "Noto Serif TC", serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+
+        /* 確保所有文字元素都使用這個字體 */
+        h1, a, h3 {
+            font-family: "Noto Serif TC", serif;
+        }
+        h2, h4, h5, h6, span, p, button, input, textarea {
+            font-family: "LXGW WenKai TC", cursive;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            typography: {
+              DEFAULT: {
+                css: {
+                  maxWidth: 'none',
+                  img: {
+                    'border-radius': '0.5rem',
+                    'margin': '2rem auto',
+                    'max-width': '100%',
+                    'height': 'auto',
+                  },
+                  p: {
+                    'line-height': '1.5',
+                    'font-size': '1.25rem',
+                  },
+                  h3: {
+                    'font-size': '1.25rem',
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <script>
+      // 添加 getCookie 函數
+      function getCookie(name) {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+              const cookies = document.cookie.split(';');
+              for (let i = 0; i < cookies.length; i++) {
+                  const cookie = cookies[i].trim();
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+          const likeButton = document.getElementById('likeButton');
+          const likeIcon = likeButton.querySelector('.material-icons');
+          const likeCount = document.getElementById('likeCount');
+          
+          likeButton.addEventListener('click', function() {
+              fetch(`/bot/article/{{ article.id }}/like`, {
+                  method: 'POST',
+                  headers: {
+                      'X-CSRFToken': getCookie('csrftoken'),
+                      'Content-Type': 'application/json',
+                  },
+              })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      // 更新讚數
+                      likeCount.textContent = data.likes;
+                      
+                      // 切換大拇指圖示和背景色
+                      likeIcon.textContent = data.is_liked ? 'thumb_up' : 'thumb_up_off_alt';
+                      likeButton.classList.toggle('bg-[#c8b6a6]');
+                      likeButton.classList.toggle('text-white');
+                      likeButton.classList.toggle('bg-white');
+                  }
+              })
+              .catch(error => console.error('Error:', error));
+          });
+      });
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Header -->
+    <header class="bg-[#c8b6a6] sticky top-0 z-50 px-5 py-3">
+        <div class="flex justify-between items-center max-w-7xl mx-auto">
+            <img src="https://firebasestorage.googleapis.com/v0/b/linefresh-2024.firebasestorage.app/o/images%2Fimg_list%2Ficon.png?alt=media&token=d4cf1b23-cbe2-4636-9121-3ac7317e9213" alt="青銀故事屋" class="zen-old-mincho-regular h-10 w-auto text-lg md:text-xl font-bold">
+            <a href="{% url 'article_list' %}" 
+               class="bg-black text-white px-4 py-2 rounded-lg text-sm font-bold 
+                      hover:bg-gray-800 transition-colors duration-300">
+                首頁
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="px-4 py-5 max-w-4xl mx-auto">
+        <article class="mb-8">
+            <!-- 標題 -->
+            <h1 class="text-3xl font-bold mb-3 break-words">
+                {{ article.title }}
+            </h1>
+
+            <!-- 作者和時間 -->
+            <div class="flex items-center gap-3 mb-5">
+                {% if article.author_pic %}
+                <img 
+                    src="{{ article.author_pic }}" 
+                    alt="author" 
+                    class="w-12 h-12 rounded-full object-cover"
+                />
+                {% else %}
+                <!-- 預設頭像 -->
+                <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                    <span class="text-gray-500 text-lg">{{ article.author|first }}</span>
+                </div>
+                {% endif %}
+                
+                <div class="flex flex-col">
+                    <span class="text-base font-medium text-gray-900">{{ article.author }}</span>
+                    <span class="text-sm text-gray-500">{{ article.time }}</span>
+                </div>
+            </div>
+
+            <!-- 標籤 -->
+            <div class="flex flex-wrap gap-2 mb-8">
+                {% for tag in article.tags %}
+                    <span class="bg-[#e7ebe6] text-gray-700 px-3 py-1 rounded-full text-sm 
+                                font-medium hover:bg-[#d4c2b0] cursor-pointer transition-all 
+                                duration-300 hover:scale-105">
+                        {{ tag }}
+                    </span>
+                {% endfor %}
+            </div>
+
+            <!-- 文章內容 -->
+            <div class="prose prose-lg max-w-none">
+                <!-- 引言 -->
+                <h2 class="text-2xl font-bold mb-4">引言</h2>
+                {{ article.introduction|safe }}
+                
+                <!-- 發展 -->
+                <h2 class="text-2xl font-bold mb-4">發展</h2>
+                {{ article.development|safe }}
+                
+                <!-- 結局 -->
+                <h2 class="text-2xl font-bold mb-4">結局</h2>
+                {{ article.conclusion|safe }}
+            </div>
+
+            <!-- 按讚功能 -->
+            <div class="flex items-center justify-center mt-8 mb-12">
+                <button id="likeButton" 
+                        class="flex items-center gap-2 px-6 py-3 border-2 border-[#c8b6a6] 
+                               rounded-full hover:bg-[#c8b6a6] hover:text-white transition-all duration-300
+                               focus:outline-none group
+                               {% if request.session.line_user_id in article.liked_by %}bg-[#c8b6a6] text-white{% else %}bg-white{% endif %}"
+                        data-article-id="{{ article.id }}">
+                    <i class="material-icons transform group-hover:scale-110 transition-transform duration-300">
+                        {% if request.session.line_user_id in article.liked_by %}thumb_up{% else %}thumb_up_off_alt{% endif %}
+                    </i>
+                    <span id="likeCount" class="text-lg font-medium">{{ article.likes }}</span>
+                </button>
+            </div>
+        </article>
+
+        <!-- 相關文章 -->
+        <section class="mt-12">
+            <h3 class="text-2xl font-bold">相關文章</h3>
+            <div class="w-full px-4 mt-5">
+                <div class="overflow-x-auto scrollbar-hide">
+                    <div class="flex gap-2.5 pb-2.5 w-max">
+                        {% for related_article in related_articles %}
+                        <div class="flex-none w-[130px] text-center border border-gray-500/40 rounded-lg shadow-lg pb-2.5 bg-white">
+                            <a href="{% url 'article_detail' related_article.id %}" class="block hover:opacity-90 transition-opacity">
+                                {% if related_article.cover %}
+                                <img 
+                                    src="{{ related_article.cover }}" 
+                                    alt="article image" 
+                                    class="w-[130px] h-[130px] object-cover rounded-t-lg"
+                                />
+                                {% endif %}
+                                <h3 class="text-base font-bold mt-1.5 mb-0 px-2 line-clamp-2">{{ related_article.title }}</h3>
+                                <p class="text-sm text-gray-600 mt-0.5 mb-0">{{ related_article.author }}</p>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+
