@@ -135,8 +135,9 @@ def rich_menu_object_main_json():
                     "height": 1686
                 },
                 "action": {
-                    "type": "message",
-                    "text": "使用說明"
+                    "type": "uri",
+                    "uri": "https://youtu.be/QEzR6sx1SfA?si=ddA_EKQOEqMyWPDO",
+                    "label": "使用說明"
                 }
             },
             {
