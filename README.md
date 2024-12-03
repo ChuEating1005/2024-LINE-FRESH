@@ -1,6 +1,6 @@
 # 青銀故事屋 YStoryHouse
 
-LINE FRESH 2024 技術新星計畫 第八組：爆爆源
+LINE FRESH 2024 校園競賽 第八組：爆爆源
 
 ## 專案理念
 
