@@ -10,6 +10,11 @@ LINE FRESH 2024 技術新星計畫 第八組：爆爆源
 
 專案不僅滿足青銀兩代的需求，還具備深遠的社會與經濟效益。透過知識分享與文化交流，提升銀世代的自我價值，同時激發青世代的解決問題能力。結合回饋機制促進平台參與度，帶動商業活動，實現社會共好與經濟正循環。
 
+## 專案資訊
+
+- [Demo 影片](https://www.youtube.com/watch?v=QEzR6sx1SfAo)
+- [Project 企劃書](https://www.canva.com/design/DAGXStSQ2DY/urVT4kM-0JidpO_EJJMkOw/edit?utm_content=DAGXStSQ2DY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 ## 參賽資訊
 | 姓名 | 學校 |
 | --- | --- |
@@ -20,7 +25,7 @@ LINE FRESH 2024 技術新星計畫 第八組：爆爆源
 | 蔡昀錚 | 交大資工大三 |
 
 ## 核心功能
-
+![](./docs/core_function.png)
 平台提供以下特色功能：
 - **語音輸入**：讓銀髮族輕鬆分享故事
 - **智慧整合**：運用 AI 技術將對話轉化為精彩文章
@@ -30,7 +35,7 @@ LINE FRESH 2024 技術新星計畫 第八組：爆爆源
 
 
 ## 技術架構
-
+![](./docs/tech_stack.png)
 - **前端**: LINE Frontend Framework (LIFF)
 - **後端**: Django
 - **資料庫**: MySQL
