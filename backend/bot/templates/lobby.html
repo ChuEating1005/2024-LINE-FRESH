@@ -294,7 +294,7 @@
         </div>
 
         <div class="flex justify-center items-center relative">
-          <div class="flex gap-2.5 overflow-x-auto scrollbar-hide w-[280px] pb-2.5" data-topic="{{ topic }}">
+          <div class="flex gap-2.5 overflow-x-auto scrollbar-hide w-[330px] pb-2.5" data-topic="{{ topic }}">
             {% for article in articles %}
             <div class="flex-none w-[150px] h-[250px] text-center border border-gray-400/40 rounded-lg shadow-md overflow-hidden">
                 <a href="{% url 'article_detail' article.id %}" class="block hover:opacity-90 transition-opacity no-underline text-black h-full">
