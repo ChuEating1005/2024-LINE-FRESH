@@ -52,7 +52,9 @@
 
 
 ## 技術架構
-![](./docs/tech_stack.png)
+<div align="center">
+  <img src="./docs/tech_stack.png">
+</div>  
 
 - **前端**：LINE Frontend Framework (LIFF)
 - **後端**：Django
