@@ -50,14 +50,14 @@
 ## 技術架構
 ![](./docs/tech_stack.png)
 
-- **前端**: LINE Frontend Framework (LIFF)
-- **後端**: Django
-- **資料庫**: MySQL
-- **LLM**: ChatGPT 3.5-Turbo / 4o (OpenAI API)
-- **圖片生成**: Pollinations.ai API / DALL-E 3 (OpenAI API)
-- **訊息服務**: LINE Messaging API
-- **語音處理**: Taiwan AI Labs ASR （雅婷智慧）
-- **容器化**: Docker
+- **前端**：LINE Frontend Framework (LIFF)
+- **後端**：Django
+- **資料庫**：MySQL
+- **LLM**：ChatGPT 3.5-Turbo / 4o (OpenAI API)
+- **圖片生成**：Pollinations.ai API / DALL-E 3 (OpenAI API)
+- **訊息服務**：LINE Messaging API
+- **語音處理**：Taiwan AI Labs ASR （雅婷智慧）
+- **容器化**：Docker
 
 ## 環境需求
 > [!Caution]
