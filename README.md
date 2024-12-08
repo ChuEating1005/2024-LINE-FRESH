@@ -1,5 +1,8 @@
-<h1 align="center">青銀故事屋 YStoryHouse</h1>
-<h4 align="center">LINE FRESH 2024 校園競賽</h4>
+<h1 align="center">YStoryHouse</h1>
+<div align="center">
+  <img src="./docs/logo.jpg" style="width:300px;" >
+  <h4>LINE FRESH 2024 校園競賽</h4>
+</div>
 <p align="center">
   <a href="#專案資訊">專案資訊</a>&nbsp;&nbsp;•&nbsp;
   <a href="#核心功能">核心功能</a>&nbsp;&nbsp;•&nbsp;
@@ -9,17 +12,18 @@
   <a href="#使用說明">使用說明</a>
 </p>
 
+
 > [!NOTE]
-> <h3>青銀故事屋 ——「一個跨世代交流的平台」。</h3>
+> <h3>青銀故事屋「一個跨世代交流的平台」。</h3>
 > 
 > 社交是人類不可或缺的需求，在如今社群爆炸的時代，卻沒有一款適合銀髮族分享的平台，因為複雜的社群平台入門往往不易，銀世代常難以上手，然而他們積累的知識卻是不可或缺的結晶，因此我們以 LINE 這個「銀世代最熟悉的APP」為主要媒介，結合語音辨識與生成式 AI，讓青銀故事屋成為跨世代最流行的社交平台。透過圖文生成與問答互動，青銀兩世代可以分享知識，甚至互相提問，縮短世代隔閡的同時實踐價值延續。
 > 
 > 專案不僅滿足青銀兩代的需求，還具備深遠的社會與經濟效益。透過知識分享與文化交流，提升銀世代的自我價值，同時激發青世代的解決問題能力。結合回饋機制促進平台參與度，帶動商業活動，實現社會共好與經濟正循環。
 
 ## 專案資訊
-
-- [Demo 影片](https://www.youtube.com/watch?v=QEzR6sx1SfAo)
-- [Project 企劃書](https://www.canva.com/design/DAGXStSQ2DY/urVT4kM-0JidpO_EJJMkOw/edit?utm_content=DAGXStSQ2DY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+> [!Tip]
+> - [Demo 影片](https://www.youtube.com/watch?v=QEzR6sx1SfAo)
+> - [Project 企劃書](https://www.canva.com/design/DAGXStSQ2DY/urVT4kM-0JidpO_EJJMkOw/edit?utm_content=DAGXStSQ2DY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ## 參賽資訊
 | 姓名 | 學校 |
@@ -31,7 +35,9 @@
 | 蔡昀錚 | 交大資工大三 |
 
 ## 核心功能
-<img src="./docs/core_function.png" style="width:800px;" align="center">   
+<div align="center">
+  <img src="./docs/core_function.png" style="width:800px;" align="center">   
+</div>  
 
 平台提供以下特色功能：
 - **語音輸入**：讓銀髮族輕鬆分享故事
@@ -62,6 +68,8 @@
 > - LIFF ID
 > - Firebase Storage
 > - OpenAI API 金鑰
+> 
+> 詳請可至 [env.example](./backend/.env.example) 確認需要哪些屬性
 
 ## 安裝步驟
 
