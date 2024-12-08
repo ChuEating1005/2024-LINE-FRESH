@@ -34,6 +34,10 @@
 | 陳冠智 | 交大資工大三 |
 | 蔡昀錚 | 交大資工大三 |
 
+<a href="https://github.com/ChuEating1005/LINE-FRESH-2024/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ChuEating1005/LINE-FRESH-2024">
+</a>
+
 ## 核心功能
 <div align="center">
   <img src="./docs/core_function.png" style="width:800px;" align="center">   
