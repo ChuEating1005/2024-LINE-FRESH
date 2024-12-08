@@ -1,10 +1,16 @@
-# 青銀故事屋 YStoryHouse
+<h1 align="center">青銀故事屋 YStoryHouse</h1>
+<h4 align="center">LINE FRESH 2024 校園競賽</h4>
+<p align="center">
+  <a href="#專案資訊">專案資訊</a>&nbsp;&nbsp;•&nbsp;
+  <a href="#核心功能">核心功能</a>&nbsp;&nbsp;•&nbsp;
+  <a href="#技術架構">技術架構</a>&nbsp;&nbsp;•&nbsp;
+  <a href="#環境需求">環境需求</a>&nbsp;&nbsp;•&nbsp;
+  <a href="#安裝步驟">安裝步驟</a>&nbsp;&nbsp;•&nbsp;
+  <a href="#使用說明">使用說明</a>
+</p>
 
-> LINE FRESH 2024 校園競賽 第八組：爆爆源
-
-## 專案理念
 > [!NOTE]
-> **青銀故事屋 ——「一個跨世代交流的平台」。**
+> <h3>青銀故事屋 ——「一個跨世代交流的平台」。</h3>
 > 
 > 社交是人類不可或缺的需求，在如今社群爆炸的時代，卻沒有一款適合銀髮族分享的平台，因為複雜的社群平台入門往往不易，銀世代常難以上手，然而他們積累的知識卻是不可或缺的結晶，因此我們以 LINE 這個「銀世代最熟悉的APP」為主要媒介，結合語音辨識與生成式 AI，讓青銀故事屋成為跨世代最流行的社交平台。透過圖文生成與問答互動，青銀兩世代可以分享知識，甚至互相提問，縮短世代隔閡的同時實踐價值延續。
 > 
@@ -25,7 +31,8 @@
 | 蔡昀錚 | 交大資工大三 |
 
 ## 核心功能
-![](./docs/core_function.png)
+<img src="./docs/core_function.png" style="width:800px;" align="center">   
+
 平台提供以下特色功能：
 - **語音輸入**：讓銀髮族輕鬆分享故事
 - **智慧整合**：運用 AI 技術將對話轉化為精彩文章
@@ -36,6 +43,7 @@
 
 ## 技術架構
 ![](./docs/tech_stack.png)
+
 - **前端**: LINE Frontend Framework (LIFF)
 - **後端**: Django
 - **資料庫**: MySQL
@@ -143,27 +151,6 @@ backend/
     ├── views/         # 視圖函數
     └── templates/     # 共用模板
 ```
-
-## 開發指引
-
-1. **新增功能**
-   - 在 `handlers/` 目錄下新增對應的處理函數
-   - 在 `models.py` 新增需要的資料模型
-   - 在 `templates/` 新增需要的頁面模板
-
-2. **資料庫遷移**
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   ```
-
-## 貢獻指南
-
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
 
 ## License
 
